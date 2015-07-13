@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'orochi'
+
+cui = Orochi::Cd.new(STDOUT, ARGV, :program_name => File.basename($0, '.*'))
+cui.run 
