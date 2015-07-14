@@ -1,6 +1,6 @@
 # Orochi
 
-TODO: Write a gem description
+Provide command-line interface to Medusa
 
 ## Installation
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See online document with option `--help`.
 
 ## Contributing
 
