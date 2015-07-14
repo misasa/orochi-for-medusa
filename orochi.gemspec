@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'orochi/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "orochi"
+  spec.name          = "orochi-for-medusa"
   spec.version       = Orochi::VERSION
   spec.authors       = ["Yusuke Yachi"]
   spec.email         = ["yyachi@misasa.okayama-u.ac.jp"]
