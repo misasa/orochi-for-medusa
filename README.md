@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Commands
 
 | command              | description                                      |
-|----------------------+--------------------------------------------------|
+| -------------------- | ------------------------------------------------ |
 | orochi-cd            | Change the orochi working box                    |
 | orochi-ditto         | Clone box recursively                            |
 | orochi-find          | Search Medusa by keyword                         |
