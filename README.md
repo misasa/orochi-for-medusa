@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Commands
 
+Commands are summarized as:
+
 | command              | description                                      |
 | -------------------- | ------------------------------------------------ |
 | orochi-cd            | Change the orochi working box                    |
