@@ -1,4 +1,4 @@
-require 'orochi'
+require 'orochi_for_medusa'
 
 
 class Output
