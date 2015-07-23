@@ -3,13 +3,15 @@ module OrochiForMedusa
 		require 'medusa_rest_client'
 		include MedusaRestClient
 
-		attr_accessor :stdout, :argv, :opts, :stderr
+		attr_accessor :stdin, :stdout, :argv, :opts, :stderr
 		OPTS = {}		
 		def initialize(argv = ARGV, opts = {})
 			@stdout = opts[:stdout] || $stdout
 			@stderr = opts[:stderr] || $stderr
+			@stdin = opts[:stdin] || $stdin
+
 			@argv = argv
-			@program_name = opts[:program_name] || "orochi-command"
+			@program_name = opts[:command_name] || "orochi-command"
 			clear_options
 			@opts = option_parser
 		end

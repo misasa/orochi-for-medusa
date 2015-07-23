@@ -10,7 +10,7 @@ module OrochiForMedusa
 			let(:args){ ['sample'] }
 			let(:cmd){ double('cd').as_null_object }
 			it {
-				expect(manager).to receive(:load_and_instantiate).with('cd', args, {}).and_return(cmd)
+				expect(manager).to receive(:load_and_instantiate).with('cd', args, {:command_name => command_name}).and_return(cmd)
 				expect(cmd).to receive(:run)
 				subject
 			}

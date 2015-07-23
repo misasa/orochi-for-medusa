@@ -11,6 +11,7 @@ class Output
   end
 end
 
+
 # def stdout
 #  	@stdout ||= Output.new
 # end

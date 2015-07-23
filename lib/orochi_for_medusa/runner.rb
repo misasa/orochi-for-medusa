@@ -4,8 +4,8 @@ module OrochiForMedusa
 		def initialize
 		end
 		def run(args=ARGV, opts = {})
-			if command_name = opts.delete(:command_name)
-				command_name.sub!(/orochi-/,"")
+			if command_name = opts[:command_name]
+				command_name = opts[:command_name].sub(/orochi-/,"")
 				cmd = OrochiForMedusa::CommandManager.instance.load_and_instantiate command_name, args, opts
 				cmd.run
 			end

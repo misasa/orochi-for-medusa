@@ -1,5 +1,7 @@
 require "orochi_for_medusa/version"
 require "orochi_for_medusa/cui"
+require "orochi_for_medusa/runner"
+require "orochi_for_medusa/command_manager"
 require "optparse"
 require "logger"
 
