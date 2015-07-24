@@ -4,7 +4,7 @@ include MedusaRestClient
 
 module OrochiForMedusa::Commands
 	describe Pwd do
-		let(:cui) { Pwd.new(args, :stdin => stdin, :stdout => stdout, :stderr => stderr, :program_name => 'orochi-cd') }
+		let(:cui) { Pwd.new(args, :stdin => stdin, :stdout => stdout, :stderr => stderr, :program_name => 'orochi-pwd') }
 		let(:args){ [] }
 		let(:stdout){ Output.new }
 		let(:stderr){ Output.new }

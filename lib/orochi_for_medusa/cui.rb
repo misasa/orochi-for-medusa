@@ -11,7 +11,7 @@ module OrochiForMedusa
 			@stdin = opts[:stdin] || $stdin
 
 			@argv = argv
-			@program_name = opts[:command_name] || "orochi-command"
+			@program_name = opts[:program_name] || opts[:command_name] || "orochi-command"
 			clear_options
 			@opts = option_parser
 		end
