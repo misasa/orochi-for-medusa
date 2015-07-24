@@ -66,6 +66,10 @@ module OrochiForMedusa
 			exit
 		end
 
+		def system_execute(cmd)
+			system(cmd)
+		end
+
 		def execute
 			#overwirteme
 		end
