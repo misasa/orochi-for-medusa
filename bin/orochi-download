@@ -1,13 +1,9 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 # Last modified: \url{/Users/MasahiroYAMANAKA/xtreeml/orochi/bin/orochi-table} on 2015-06-11 12:00
-
+require 'orochi_for_medusa'
 require "yaml"
-require "optparse"
 require "uri"
-require "active_resource"
-require "logger"
-require "medusa_rest_client"
 require "open3"
 require 'tempfile'
 include MedusaRestClient
