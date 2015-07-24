@@ -12,3 +12,14 @@ module OrochiForMedusa
 
   # Your code goes here...
 end
+
+
+module MedusaRestClient
+  class MyAssociation
+    def empty?
+      collection = to_a
+      array = collection.to_a
+      array.empty?
+    end
+  end
+end
