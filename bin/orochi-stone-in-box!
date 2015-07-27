@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'orochi_for_medusa'
 
-OrochiForMedusa::Runner.new.run(ARGV, :command_name => "stone_in_box"
+OrochiForMedusa::Runner.new.run(ARGV, :command_name => "stone_in_box")
 
 #require 'orochi_for_medusa/runner'
 
