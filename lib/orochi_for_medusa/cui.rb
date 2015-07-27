@@ -74,6 +74,14 @@ module OrochiForMedusa
 			#overwirteme
 		end
 
+		def self.platform
+			RUBY_PLATFORM.downcase
+		end
+
+		def platform
+			self.class.platform
+		end
+
 		def run
 			Base.init
 			parse_options

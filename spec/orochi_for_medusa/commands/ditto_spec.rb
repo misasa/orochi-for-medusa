@@ -28,13 +28,6 @@ module OrochiForMedusa::Commands
 				}
 			end
 
-			describe "with --id" do
-				let(:args){ ["--id"] }
-				it { 
-					subject
-					expect(cui.options).to include(:id => true)
-				}
-			end
 
 		end
 

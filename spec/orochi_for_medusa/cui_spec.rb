@@ -23,6 +23,13 @@ module OrochiForMedusa
 			end
 		end
 
+		describe "#platform" do
+			subject { cui.platform }
+			it {
+				expect(subject).to be_an_instance_of(String)
+			}
+		end
+
 		describe "run" do
 			subject { cui.run }
 			context "execute raise error" do
