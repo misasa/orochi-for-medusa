@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-require 'orochi_for_medusa'
-
-OrochiForMedusa::Runner.new.run(ARGV.unshift("start"), :command_name => "orochi-machine")
-
