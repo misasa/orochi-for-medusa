@@ -12,7 +12,7 @@ module OrochiForMedusa::Commands
 
 					DESCRIPTION 
 						Upload any files to Medusa.  Note that casteml files are treated
-						in specially way.  For files of `*.pml', an external program
+						in special way.  For files of `*.pml', an external program
 						`casteml upload' is invoked.  For stone registration, call
 						`orochi-mkstone' instead of this program.
 
