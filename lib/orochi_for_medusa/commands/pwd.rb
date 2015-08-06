@@ -57,6 +57,16 @@ module OrochiForMedusa::Commands
 			end
 		end	
 
+        def get_ancestors(obj)
+          objs = []
+          objs.unshift(obj)
+          while obj.parent.present?
+            obj = obj.parent
+            objs.unshift(obj)
+          end
+          objs
+        end
+
 		def pwd(arg)
   			obj = Record.find_by_id_or_path(arg)
   			if OPTS[:stone]
