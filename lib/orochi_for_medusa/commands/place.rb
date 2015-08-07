@@ -38,7 +38,7 @@ module OrochiForMedusa::Commands
 			obj = Record.find_by_id_or_path(id)
 			klass = obj.class.to_s
   			klass.slice!(0,18)  ##  MedusaRestClient::Stone to Stone
-  			if obj.kind_of?(Place)
+  			if obj.kind_of?(MedusaRestClient::Place)
     			stdout.puts "#{klass}\t\t\t#{obj.name}\t#{obj.global_id}\t#{obj.latitude}\t#{obj.longitude}"
   			else
     			stdout.puts "#{klass}\t#{obj.name}\t#{obj.global_id}\t#{obj.place.name}\t#{obj.place.global_id}\t#{obj.place.latitude}\t#{obj.place.longitude}" if obj.place

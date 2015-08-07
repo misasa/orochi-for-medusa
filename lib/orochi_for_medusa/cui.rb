@@ -1,3 +1,4 @@
+require 'orochi_for_medusa/command_manager'
 module OrochiForMedusa
 	class Cui
 		require 'medusa_rest_client'
@@ -24,19 +25,21 @@ module OrochiForMedusa
 			opts = OptionParser.new do |opt|
   				opt.banner = <<-"EOS".unindent
 					NAME
-					    #{program_name} - Change the orochi working box
+					    orochi - A comprehensive utility for Medusa
 
 					SYNOPSIS
-					    #{program_name} [options] box-path
+					    orochi-command [options]
 
-					DESCRIPTION
+					COMMANDS
+						#{OrochiForMedusa::CommandManager.orochi_commands.join(", ")}
 
 					SEE ALSO
+						orochi-command --help
 
 					IMPLEMENTATION
-					    Orochi, version 9
-					   	Copyright (C) 2015 Okayama University
-					    License GPLv3+: GNU GPL version 3 or later
+						Orochi, version 9
+						Copyright (C) 2015 Okayama University
+						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
 				EOS

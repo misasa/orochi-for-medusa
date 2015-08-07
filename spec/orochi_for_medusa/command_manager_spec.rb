@@ -16,5 +16,19 @@ module OrochiForMedusa
 			end
 		end
 
+		describe ".get_commands" do
+			subject { CommandManager.get_commands }
+			it {
+				expect{ subject }.not_to raise_error
+			}
+
+		end
+
+		describe ".orochi_commands" do
+			subject { CommandManager.orochi_commands }
+			it {
+				expect{subject}.not_to raise_error
+			}
+		end
 	end
 end
