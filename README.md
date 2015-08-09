@@ -17,7 +17,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem source -a http://dream.misasa.okayama-u.ac.jp/rubygems
-    $ gem install orochi
+    $ gem install orochi-for-medusa
 
 ## Commands
 
@@ -27,23 +27,24 @@ Commands are summarized as:
 | -------------------- | ------------------------------------------------ |
 | orochi-cd            | Change the orochi working box                    |
 | orochi-ditto         | Clone box recursively                            |
+| orochi-download      | Download full datasets for polyfamilies          |
 | orochi-find          | Search Medusa by keyword                         |
+| orochi-help          |                                                  |
+| orochi-info          | Open record by w3m                               |
 | orochi-label         | Create barcode label of Medusa-ID and stone-name |
 | orochi-ls            | List box contents                                |
-| orochi-machine       | Start or stop machine session                    |
 | orochi-mkstone       | Create a stone (or box) and print barcode        |
 | orochi-mv            | Store a stone to a box                           |
 | orochi-name          | Return name of record specified by Medusa-ID     |
 | orochi-open          | Open record by default browser                   |
+| orochi-info          |                                                  |
+| orochi-place         | Search Medusa and return latitude and longitude  |
 | orochi-pwd           | Print name of the orochi working box             |
 | orochi-rename        | Rename record or change attribute                |
 | orochi-rm            | Remove each specified record                     |
+| orochi-stone-in-box! | Convert stone to box                             |
 | orochi-upload        | Upload jpg files in current directory            |
 | orochi-url           | Retrive url using curl and w3m                   |
-| orochi-stone-in-box! | Convert stone to box                             |
-| orochi-download      | Download full datasets for polyfamilies          |
-| stone                | Update location of a stone                       |
-| stones               | Do inventory count                               |
 
 
 ## Usage
