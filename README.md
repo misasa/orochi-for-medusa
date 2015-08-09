@@ -29,7 +29,7 @@ Commands are summarized as:
 | orochi-ditto         | Clone box recursively                            |
 | orochi-download      | Download full datasets for polyfamilies          |
 | orochi-find          | Search Medusa by keyword                         |
-| orochi-help          |                                                  |
+| orochi-help          | Show commands                                    |
 | orochi-info          | Open record by w3m                               |
 | orochi-label         | Create barcode label of Medusa-ID and stone-name |
 | orochi-ls            | List box contents                                |
@@ -37,12 +37,12 @@ Commands are summarized as:
 | orochi-mv            | Store a stone to a box                           |
 | orochi-name          | Return name of record specified by Medusa-ID     |
 | orochi-open          | Open record by default browser                   |
-| orochi-info          |                                                  |
 | orochi-place         | Search Medusa and return latitude and longitude  |
 | orochi-pwd           | Print name of the orochi working box             |
 | orochi-rename        | Rename record or change attribute                |
 | orochi-rm            | Remove each specified record                     |
 | orochi-stone-in-box! | Convert stone to box                             |
+| orochi-uniq          | Repeat only one stone in family                  |
 | orochi-upload        | Upload jpg files in current directory            |
 | orochi-url           | Retrive url using curl and w3m                   |
 
