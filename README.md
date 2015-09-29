@@ -7,7 +7,7 @@ Provide command-line interface to Medusa
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'orochi'
+gem 'orochi-for-medusa'
 ```
 
 And then execute:
