@@ -1,8 +1,8 @@
-# Orochi
+# orochi-for-medusa
 
 Provide command-line interface to Medusa
 
-## Installation
+# Installation
 
 Add this line to your application's Gemfile:
 
@@ -19,7 +19,7 @@ Or install it yourself as:
     $ gem source -a http://dream.misasa.okayama-u.ac.jp/rubygems
     $ gem install orochi-for-medusa
 
-## Commands
+# Commands
 
 Commands are summarized as:
 
@@ -47,11 +47,11 @@ Commands are summarized as:
 | orochi-url           | Retrive url using curl and w3m                   |
 
 
-## Usage
+# Usage
 
 See online document with option `--help`.
 
-## Contributing
+# Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/orochi/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
