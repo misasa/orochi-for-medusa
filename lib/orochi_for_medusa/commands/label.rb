@@ -1,4 +1,5 @@
 require 'orochi_for_medusa/cui'
+require 'open3'
 module OrochiForMedusa::Commands
 	class Label < OrochiForMedusa::Cui
 		def option_parser
