@@ -88,7 +88,7 @@ module OrochiForMedusa::Commands
         end
       end
       if obj.kind_of?(Box)
-        puts "#{arg}:" if $id.size > 1
+        # puts "#{arg}:" if $id.size > 1
         obj.entries.each do |entry|
           census(entry)
         end
