@@ -25,7 +25,7 @@ module OrochiForMedusa::Commands
 					OPTIONS
 				EOS
 				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-				opt.on("--stone_type", "Change stone_type") {|v| OPTS[:stone] = v}
+				#opt.on("--stone_type", "Change stone_type") {|v| OPTS[:stone] = v}
 				opt.on("--description", "Change description") {|v| OPTS[:description] = v}
 				opt.on("--parent_id", "Change parent_id") {|v| OPTS[:parent_id] = v}
 				opt.on("--place_id", "Change place_id") {|v| OPTS[:place_id] = v}
@@ -46,8 +46,8 @@ module OrochiForMedusa::Commands
 			if OPTS[:id]
 			  # obj.id                = newparam
 			  # obj.update_record_property({:id => newparam})
-			elsif OPTS[:stone]
-			  obj.stone_type        = newparam
+			# elsif OPTS[:stone]
+			#   obj.stone_type        = newparam
 			elsif OPTS[:description]
 			  obj.description       = newparam
 			elsif OPTS[:parent_id]

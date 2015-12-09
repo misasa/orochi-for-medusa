@@ -35,8 +35,8 @@ module OrochiForMedusa::Commands
 		    obj = Record.find(arg)
 		    if obj.kind_of?(Box)
 		      klass = "boxes"
-		    elsif obj.kind_of?(Stone)
-		      klass = "stones"
+		    elsif obj.kind_of?(Specimen)
+		      klass = "specimens"
 		    elsif obj.kind_of?(Analysis)
 		      klass = "analyses"
 		    elsif obj.kind_of?(Place)

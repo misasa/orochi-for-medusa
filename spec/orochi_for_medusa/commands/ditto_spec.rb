@@ -84,8 +84,8 @@ module OrochiForMedusa::Commands
 			context "with stone" do
 				it {
 					allow(obj).to receive(:kind_of?).with(Box).and_return(false)
-					allow(obj).to receive(:kind_of?).with(Stone).and_return(true)
-					allow(Stone).to receive(:new).and_return(repl)
+					allow(obj).to receive(:kind_of?).with(Specimen).and_return(true)
+					allow(Specimen).to receive(:new).and_return(repl)
 					expect(repl).to receive(:name=).with("#{obj.name}-copy")
 					expect(repl).to receive(:save)
 					subject
@@ -95,7 +95,7 @@ module OrochiForMedusa::Commands
 			context "with other" do
 				it {
 					allow(obj).to receive(:kind_of?).with(Box).and_return(false)
-					allow(obj).to receive(:kind_of?).with(Stone).and_return(false)
+					allow(obj).to receive(:kind_of?).with(Specimen).and_return(false)
 					expect{ subject }.to raise_error("Class unsupported")
 				}
 			end

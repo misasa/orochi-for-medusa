@@ -54,7 +54,7 @@ module OrochiForMedusa::Commands
 			let(:name){ "new-sample"}
 			let(:obj){ double("sample", :name => name, :global_id => "0003").as_null_object }
 			before do
-				allow(Stone).to receive(:new).and_return(obj)
+				allow(Specimen).to receive(:new).and_return(obj)
 			end
 			it {
 				expect(obj).to receive(:name=).with(name)

@@ -50,25 +50,27 @@ module OrochiForMedusa::Commands
 
 					ARGUMENTS AND OPTIONS
 				EOS
-				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-				opt.on("-i", "--interactive", "Run interactively") {|v| OPTS[:interactive] = v}
-				opt.on("--id", "Guess URL by ID") {|v| OPTS[:id] = v}
+				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| cmd_options[:verbose] = v}
+				opt.on("-i", "--interactive", "Run interactively") {|v| cmd_options[:interactive] = v}
+				opt.on("--id", "Guess URL by ID") {|v| cmd_options[:id] = v}
 
 			end
 			opts
 		end
 
 
-		def transfer_and_render(url)
+		def transfer_and_render(url_or_id)
 			user = Base.user
 			password = Base.password
 
-			  if OPTS[:id]
-			    obj = Record.find_by_id_or_path(url)
+			  if cmd_options[:id]
+			    obj = Record.find_by_id_or_path(url_or_id)
 			    if obj.kind_of?(Box)
 			      klass = "boxes"
-			    elsif obj.kind_of?(Stone)
-			      klass = "stones"
+			    # elsif obj.kind_of?(Stone)
+			    #   klass = "stones"
+			    elsif obj.kind_of?(Specimen)
+			      klass = "specimens"
 			    elsif obj.kind_of?(Analysis)
 			      klass = "analyses"
 			    elsif obj.kind_of?(Place)
@@ -78,9 +80,11 @@ module OrochiForMedusa::Commands
 			    elsif obj.kind_of?(AttachmentFile)
 			      klass = "attachment_files"
 			    else
-			      raise
+			      raise "#{obj.class} not supported"
 			    end
 			    url = "http://database.misasa.okayama-u.ac.jp/stone/#{klass}/#{obj.id}"
+			  else
+			  	url = url_or_id
 			  end
 			  cmd = "curl --user #{user}:#{password} -s #{url} | \ w3m -T text/html -dump"
 			  status = []

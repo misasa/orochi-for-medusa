@@ -33,8 +33,8 @@ module OrochiForMedusa::Commands
 		def ditto(tmp)
 		  if tmp.kind_of?(Box)
 		    @rpl = Box.new
-		  elsif tmp.kind_of?(Stone)
-		    @rpl = Stone.new
+		  elsif tmp.kind_of?(Specimen)
+		    @rpl = Specimen.new
 		  else 
 		  	raise "Class unsupported"
 		  end
@@ -46,7 +46,7 @@ module OrochiForMedusa::Commands
 		def act(arg)
 		  obj = Record.find_by_id_or_path(arg)
 		  ditto(obj)
-		  if @rpl.kind_of?(Stone) 
+		  if @rpl.kind_of?(Specimen) 
 		    @rpl.box_id = obj.box_id
 		    @rpl.save
 		  end
@@ -65,7 +65,7 @@ module OrochiForMedusa::Commands
 		  unless cld.boxes.empty?
 		    rlts = cld.boxes
 		  else
-		    rlts = cld.stones
+		    rlts = cld.specimens
 		  end
 		  if rlts.empty?
 		    puts "nil"

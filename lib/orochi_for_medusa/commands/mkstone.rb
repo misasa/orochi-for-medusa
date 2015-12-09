@@ -46,7 +46,7 @@ module OrochiForMedusa::Commands
 			if OPTS[:mkbox]
 			  obj = Box.new
 			else 
-			  obj = Stone.new
+			  obj = Specimen.new
 			end
 			obj.name = "#{stonename}"
 			obj.save

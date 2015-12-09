@@ -24,7 +24,7 @@ module OrochiForMedusa::Commands
 				let(:args){ ["-v"] }
 				it { 
 					subject
-					expect(cui.options).to include(:verbose => true)
+					expect(cui.cmd_options).to include(:verbose => true)
 				}
 			end
 
