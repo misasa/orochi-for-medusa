@@ -14,6 +14,10 @@ module OrochiForMedusa::Commands
 						Rename record or change attribute.  Rename a record unless
 						option is specified.
 
+                    EXAMPLE
+                        When you want to set -1 to quantity, insert `--'.
+                        > #{program_name} 20140827154239-812605 --quantity -- -1
+
 					SEE ALSO
 						http://dream.misasa.okayama-u.ac.jp
 
