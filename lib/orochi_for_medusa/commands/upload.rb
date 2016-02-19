@@ -10,15 +10,15 @@ module OrochiForMedusa::Commands
 					SYNOPSIS
 						#{program_name} [options] file0 [file1 ...]
 
-					DESCRIPTION 
+					DESCRIPTION
 						Upload any files to Medusa.  Note that casteml files are treated
 						in special way.  For files of `*.pml', an external program
 						`casteml upload' is invoked.  For stone registration, call
 						`orochi-mkstone' instead of this program.
 
 						Note that `casteml upload' does not take stone-ID as an option.
-						Because stone-ID to be correlated with should be specified in
-						pmlfile.
+                        This is because stone-ID to be correlated with, should be specified
+                        in pmlfile.
 
 					SEE ALSO
 						http://dream.misasa.okayama-u.ac.jp
@@ -27,7 +27,7 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015 Okayama University
+						Copyright (C) 2015, 2016 Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
@@ -47,11 +47,11 @@ module OrochiForMedusa::Commands
 			else argv.each do |file|
 			    upload(file)
 			  end
-			end			
-		end	
+			end
+		end
 
 		def upload(arg)
-		  ext = File.extname(arg)  
+		  ext = File.extname(arg)
 		  if ext.downcase == ".jpg"
 		    img = AttachmentFile.upload(arg)
 		    p img
