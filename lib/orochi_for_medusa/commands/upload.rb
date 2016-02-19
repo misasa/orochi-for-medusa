@@ -27,7 +27,7 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015, 2016 Okayama University
+						Copyright (C) 2015-2016, Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
@@ -63,7 +63,6 @@ module OrochiForMedusa::Commands
 		    puts "unsupported file extension"
 		  end
 		end
-
 
 	end
 end
