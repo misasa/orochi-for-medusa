@@ -27,12 +27,12 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015 Okayama University
+						Copyright (C) 2015-2016 Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
 				EOS
-				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}				
+				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
 				opt.on("-i", "--interactive", "Run interactively") {|v| OPTS[:interactive] = v}
 
 			end
@@ -44,7 +44,7 @@ module OrochiForMedusa::Commands
 			parent_id = argv.pop
 			children_id = argv
 			mv(parent_id, children_id)
-		end	
+		end
 
 		def mv(parent_id, children_id)
 
@@ -52,8 +52,12 @@ module OrochiForMedusa::Commands
 			OPTS[:nobox]  = :v if parent_id == "/"
 
 			parent_obj  = Record.find(parent_id) unless OPTS[:nobody] or OPTS[:nobox]
-			p parent_obj       if OPTS[:verbose]
-			p parent_obj.class if OPTS[:verbose]
+            # p parent_obj       if OPTS[:verbose]
+            if OPTS[:verbose]
+			  # child_obj = child_obj.reload
+              print "--> parent_obj "
+              p parent_obj
+            end
 
 			children_id.each do |id|
 			  child_obj = Record.find(id)
@@ -95,7 +99,11 @@ module OrochiForMedusa::Commands
 			    # end
 			    #  child_obj.save
 			  end
-			  p child_obj.reload
+              if OPTS[:verbose]
+			    child_obj = child_obj.reload
+                print "--> child_obj.reload "
+                p child_obj
+              end
 			end
 		end
 	end

@@ -2,7 +2,8 @@ require 'orochi_for_medusa/cui'
 module OrochiForMedusa::Commands
 	class StoneInBox < OrochiForMedusa::Cui
 		def option_parser
-			opts = OptionParser.new do |opt|
+		  opts = OptionParser.new do |opt|
+				program_name = "orochi-stone-in-box" # becuase command name and filename are different
 				opt.banner = <<-"EOS".unindent
 					NAME
 						#{program_name} - Transform stone to box

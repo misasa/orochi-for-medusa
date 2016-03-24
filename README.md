@@ -58,6 +58,10 @@ Show message either on standard input with verbose option or standard error as f
 
     print "--> stonename |#{stonename}|\n" if OPTS[:verbose]
     STDERR.print "--> stonename |#{stonename}|\n"
+    if OPTS[:verbose]
+      print "--> child_parent "
+      p child_parent
+    end
 
 ## test locally
 Before commit the revision, test the code by following method using rspec.
