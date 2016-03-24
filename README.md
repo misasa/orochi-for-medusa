@@ -41,7 +41,7 @@ Commands are summarized as:
 | orochi-pwd           | Print name of the orochi working box             |
 | orochi-rename        | Rename record or change attribute                |
 | orochi-rm            | Remove each specified record                     |
-| orochi-stone-in-box! | Convert stone to box                             |
+| orochi-stone-in-box  | Convert stone to box                             |
 | orochi-uniq          | Repeat only one stone in family                  |
 | orochi-upload        | Upload jpg files in current directory            |
 | orochi-url           | Retrive url using curl and w3m                   |
@@ -59,8 +59,8 @@ Show message either on standard input with verbose option or standard error as f
     print "--> stonename |#{stonename}|\n" if OPTS[:verbose]
     STDERR.print "--> stonename |#{stonename}|\n"
     if OPTS[:verbose]
-      print "--> child_parent "
-      p child_parent
+      print "--> parent_obj "
+      p parent_obj
     end
 
 ## test locally

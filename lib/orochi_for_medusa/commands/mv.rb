@@ -101,7 +101,7 @@ module OrochiForMedusa::Commands
 			  end
               if OPTS[:verbose]
 			    child_obj = child_obj.reload
-                print "--> child_obj.reload "
+                print "--> child_obj "
                 p child_obj
               end
 			end
