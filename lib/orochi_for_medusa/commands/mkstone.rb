@@ -19,12 +19,12 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015 Okayama University
+						Copyright (C) 2015-2016 Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
 				EOS
-				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}				
+				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
 
 				opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
 				opt.on("-T image", "--upload-file image", "Run upload_file") {|v| OPTS[:upload_file] = v}
@@ -40,12 +40,12 @@ module OrochiForMedusa::Commands
 			stonename = argv[0]
 			mkstone(stonename)
 
-		end	
+		end
 
 		def mkstone(stonename)
 			if OPTS[:mkbox]
 			  obj = Box.new
-			else 
+			else
 			  obj = Specimen.new
 			end
 			obj.name = "#{stonename}"
@@ -57,13 +57,14 @@ module OrochiForMedusa::Commands
 
 			unless OPTS[:label]
 			  cmd = "tepra print #{obj.global_id},#{obj.name}"
-			  p RUBY_PLATFORM
-			  unless RUBY_PLATFORM.downcase =~ /darwin/ 
-			    p cmd
+			  print "--> RUBY_PLATFORM |#{RUBY_PLATFORM}|\n" if OPTS[:verbose]
+			  # STDERR.print "--> RUBY_PLATFORM |#{RUBY_PLATFORM}|\n"
+			  unless RUBY_PLATFORM.downcase =~ /darwin/
+			    # print "--> cmd |#{cmd}|\n" if OPTS[:verbose]
+			    STDERR.print "--> cmd |#{cmd}|\n"
 			    system_execute(cmd)
 			  end
 			end
-
 		end
 	end
 end

@@ -57,9 +57,9 @@ module OrochiForMedusa::Commands
 				allow(Specimen).to receive(:new).and_return(obj)
 			end
 			it {
-				expect(obj).to receive(:name=).with(name)
-				expect(cui).to receive(:system_execute).with("tepra print #{obj.global_id},#{obj.name}")
-				subject
+			  expect(obj).to receive(:name=).with(name)
+			  #expect(cui).to receive(:system_execute).with("tepra print #{obj.global_id},#{obj.name}")
+		      subject
 			}
 		end
 
