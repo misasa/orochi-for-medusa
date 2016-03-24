@@ -11,7 +11,7 @@ module OrochiForMedusa::Commands
 					    #{program_name} [options] id0 [id1 ...]
 
 					DESCRIPTION
-					    Search Medusa by ID and return name.  To obtain Medusa-ID, use orochi-find.
+					    Access a record in Medusa by ID and return name.  To obtain Medusa-ID, use orochi-find.
 
 					SEE ALSO
 					    orochi-find
@@ -20,7 +20,7 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015 Okayama University
+						Copyright (C) 2015-2016 Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
