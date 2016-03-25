@@ -68,8 +68,8 @@ Before commit the revision, test the code by following method using rspec.
 
     $ cd ~/devel-godigo/orochi-for-medusa
     $ bundle install --path vendor/bundler
-    $ bundle exec rspec spec/orochi-for-medusa/commands/stone_in_box_spec.rb
-    $ bundle exec rspec spec/orochi-for-medusa/commands/stone_in_box_spec.rb --tag show_help:true
+    $ bundle exec rspec spec/orochi_for_medusa/commands/stone_in_box_spec.rb
+    $ bundle exec rspec spec/orochi_for_medusa/commands/stone_in_box_spec.rb --tag show_help:true
 
 
 # Contributing
