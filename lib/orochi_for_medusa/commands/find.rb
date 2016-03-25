@@ -15,8 +15,8 @@ module OrochiForMedusa::Commands
 						Medusa-ID, use orochi-name.
 
 					EXAMPLE
-						DOS> orochi-find maagnetite
-						DOS> orochi-find maagnetite | orochi-name
+						DOS> orochi-find magnetite
+						DOS> orochi-find magnetite | orochi-name
 
 					SEE ALSO
 						orochi-name

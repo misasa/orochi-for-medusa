@@ -7,23 +7,23 @@ module OrochiForMedusa::Commands
 			opts = OptionParser.new do |opt|
 				opt.banner = <<-"EOS".unindent
 					NAME
-					    #{program_name} - Transfer and render a Medusa URL
+					    #{program_name} - Obtain page from a Medusa URL output rendered text
 
 					SYNOPSIS AND USAGE
 					    #{program_name} [options] [URL]
 
 					DESCRIPTION
-					    Transfer and render a Medusa URL.  This will obtain page content
-					    by `curl' through basic authorization and render it by `w3m', then
-					    filter out header and footer by itself.  This gets authorization
-					    information from `~/.orochirc'.
+					    Obtain aage and render a Medusa URLObtain page from a Medusa URL output
+                        rendered text.  This will obtain page content by `curl' through basic
+                        authorization and render it by `w3m', then filter out header and footer
+                        by itself.  This gets authorization information from `~/.orochirc'.
 
 					    Essence of this program is shown below.
-					      curl --user user:password -s http://database.misasa.okayama-u.ac.jp/stone/stones/19750 |
+					      curl --user user:password -s http://database.misasa.okayama-u.ac.jp/stone/specimens/634 |
 					      w3m -T text/html -dump
 
 					EXAMPLE
-					    $ orochi-url http://database.misasa.okayama-u.ac.jp/stone/stones/19745
+					    $ orochi-url http://database.misasa.okayama-u.ac.jp/stone/specimens/634
 
 					    yttrium standard solution, 47012-1B, Kanto 1 < 20150521115620-135759 >
 					    - yttrium standard solution, 47012-1B, Kanto11\me
@@ -44,7 +44,7 @@ module OrochiForMedusa::Commands
 
 					IMPLEMENTATION
 					    Orochi, version 9
-					    Copyright (C) 2015 Okayama University
+					    Copyright (C) 2015-2016 Okayama University
 					    License GPLv3+: GNU GPL version 3 or later
 
 					HISTORY
@@ -86,9 +86,12 @@ module OrochiForMedusa::Commands
 			  else
 			  	url = url_or_id
 			  end
-			  cmd = "curl --user #{user}:#{password} -s #{url} | \ w3m -T text/html -dump"
+			  cmd = "curl --user #{user}:#{password} -s #{url} | w3m -T text/html -dump -t 4 -S -cols 256"
 			  status = []
-			  stdout.puts cmd
+              if cmd_options[:verbose]
+			    # stdout.puts cmd
+			    stderr.print "--> I will parse output by <#{cmd}>\n"
+              end
 			  Open3.popen3(cmd) do |pstdin, pstdout, pstderr|
 			    # err = stderr.read
 			    # unless err.blank?
@@ -96,19 +99,23 @@ module OrochiForMedusa::Commands
 			    # end
 			    outputs =  pstdout.read
 			    outputs.each_line do |line|
-			      stdout.puts line      if line =~ /\<.*\>/
-			      stdout.puts line      if line =~ /／me/
+                  ## typical output
+			      stdout.puts line                    if line =~ /\<.*\>/
+			      # stdout.puts line                  if line =~ /／me/
+			      stdout.puts line.sub(/^\s*•\s*/,"") if line =~ /• classification:/
+			      stdout.puts line.sub(/^\s*•\s*/,"") if line =~ /• physical-form/
+			      stdout.puts line.sub(/^\s*•\s*/,"") if line =~ /• quantity.*\(.*\)/
+			      stdout.puts line.sub(/^\s*•\s*/,"") if line =~ /• description/
+			      stdout.puts line.sub(/^\s*•\s*/,"") if line =~ /• modified/
+
+                  ## reconstruct status
 			      status.push(line.delete("• ").chomp) if line =~ /• daughter/
+			      status.push(line.delete("• ").chomp) if line =~ /• history/
 			      status.push(line.delete("• ").chomp) if line =~ /• analysis/
 			      status.push(line.delete("• ").chomp) if line =~ /• bib/
 			      status.push(line.delete("• ").chomp) if line =~ /• file/
-			      stdout.puts line.delete("• ")        if line =~ /classification/
-			      stdout.puts line.delete("• ")        if line =~ /physical_form/
-			      stdout.puts line.delete("• ")        if line =~ /quantity.*\(.*\)/
-			      stdout.puts line.delete("• ")        if line =~ /description/
-			      stdout.puts line.delete("• ")        if line =~ /modified/
 			    end
-			    status.shift(3)
+			    status.shift(3) # hard code
 			    stdout.puts status.join("/ ")
 			  end
 		end
