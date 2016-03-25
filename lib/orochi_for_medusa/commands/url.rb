@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'orochi_for_medusa/cui'
 require 'open3'
 module OrochiForMedusa::Commands
@@ -6,58 +7,57 @@ module OrochiForMedusa::Commands
 			opts = OptionParser.new do |opt|
 				opt.banner = <<-"EOS".unindent
 					NAME
-						#{program_name} - Transfer and render a Medusa URL
+					    #{program_name} - Transfer and render a Medusa URL
 
 					SYNOPSIS AND USAGE
-						#{program_name} [options] [URL]
+					    #{program_name} [options] [URL]
 
 					DESCRIPTION
-						Transfer and render a Medusa URL.  This will obtain page content
-						by `curl' through basic authorization and render it by `w3m', then
-						filter out header and footer by itself.  This gets authorization
-						information from `~/.orochirc'.
+					    Transfer and render a Medusa URL.  This will obtain page content
+					    by `curl' through basic authorization and render it by `w3m', then
+					    filter out header and footer by itself.  This gets authorization
+					    information from `~/.orochirc'.
 
-						Essence of this program is shown below.  curl --user user:password
-						-s http://database.misasa.okayama-u.ac.jp/stone/stones/19750 | \
-						w3m -T text/html -dump
+					    Essence of this program is shown below.
+					      curl --user user:password -s http://database.misasa.okayama-u.ac.jp/stone/stones/19750 |
+					      w3m -T text/html -dump
 
 					EXAMPLE
-						$ orochi-url http://database.misasa.okayama-u.ac.jp/stone/stones/19745
-						yttrium standard solution, 47012-1B, Kanto 1 < 20150521115620-135759 >
-						- yttrium standard solution, 47012-1B, Kanto11\me
-						- ISEI/main/clean-lab/ICP-MS/tuning solutions/me
-						- daughter (1) / analysis / bib / file (1)
-						- classification: unknown
-						- physical_form: solution
-						- quantity (ml): 100.0
-						- description: 47012-1B
-						- modified at yesterday, 5:47
-						$ orochi-url --id 20150521110909-111103
-						...
+					    $ orochi-url http://database.misasa.okayama-u.ac.jp/stone/stones/19745
+
+					    yttrium standard solution, 47012-1B, Kanto 1 < 20150521115620-135759 >
+					    - yttrium standard solution, 47012-1B, Kanto11\me
+					    - ISEI/main/clean-lab/ICP-MS/tuning solutions/me
+					    - daughter (1) / analysis / bib / file (1)
+					    - classification: unknown
+					    - physical_form: solution
+					    - quantity (ml): 100.0
+					    - description: 47012-1B
+					    - modified at yesterday, 5:47
+					    $ orochi-url --id 20150521110909-111103
+					    ...
 
 					SEE ALSO
-						curl
-						w3m
-						http://dream.misasa.okayama-u.ac.jp
+					    curl
+					    w3m
+					    http://dream.misasa.okayama-u.ac.jp
 
 					IMPLEMENTATION
-						Orochi, version 9
-						Copyright (C) 2015 Okayama University
-						License GPLv3+: GNU GPL version 3 or later
+					    Orochi, version 9
+					    Copyright (C) 2015 Okayama University
+					    License GPLv3+: GNU GPL version 3 or later
 
 					HISTORY
-						May 25, 2015: MY writes the first version
+					    May 25, 2015: MY writes the first version
 
 					ARGUMENTS AND OPTIONS
 				EOS
 				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| cmd_options[:verbose] = v}
 				opt.on("-i", "--interactive", "Run interactively") {|v| cmd_options[:interactive] = v}
 				opt.on("--id", "Guess URL by ID") {|v| cmd_options[:id] = v}
-
 			end
 			opts
 		end
-
 
 		def transfer_and_render(url_or_id)
 			user = Base.user
@@ -102,16 +102,15 @@ module OrochiForMedusa::Commands
 			      status.push(line.delete("• ").chomp) if line =~ /• analysis/
 			      status.push(line.delete("• ").chomp) if line =~ /• bib/
 			      status.push(line.delete("• ").chomp) if line =~ /• file/
-			      stdout.puts line.delete("• ")                if line =~ /classification/
-			      stdout.puts line.delete("• ")                if line =~ /physical_form/
-			      stdout.puts line.delete("• ")                if line =~ /quantity.*\(.*\)/
-			      stdout.puts line.delete("• ")                if line =~ /description/
-			      stdout.puts line.delete("• ")                if line =~ /modified/
+			      stdout.puts line.delete("• ")        if line =~ /classification/
+			      stdout.puts line.delete("• ")        if line =~ /physical_form/
+			      stdout.puts line.delete("• ")        if line =~ /quantity.*\(.*\)/
+			      stdout.puts line.delete("• ")        if line =~ /description/
+			      stdout.puts line.delete("• ")        if line =~ /modified/
 			    end
 			    status.shift(3)
 			    stdout.puts status.join("/ ")
 			  end
-
 		end
 
 		def execute
@@ -125,8 +124,6 @@ module OrochiForMedusa::Commands
 			    transfer_and_render(id)
 			  end
 			end
-
-		end	
-
+		end
 	end
 end

@@ -15,16 +15,16 @@ module OrochiForMedusa::Commands
 						Medusa-ID, use orochi-name.
 
 					EXAMPLE
-    					DOS> ruby -S orochi-find maagnetite
-    					DOS> ruby -S orochi-find maagnetite | ruby -S orochi-name
+						DOS> orochi-find maagnetite
+						DOS> orochi-find maagnetite | orochi-name
 
 					SEE ALSO
-    					orochi-name
-    					http://dream.misasa.okayama-u.ac.jp
+						orochi-name
+						http://dream.misasa.okayama-u.ac.jp
 
 					IMPLEMENTATION
 						Orochi, version 9
-						Copyright (C) 2015 Okayama University
+						Copyright (C) 2015-2016 Okayama University
 						License GPLv3+: GNU GPL version 3 or later
 
 					OPTIONS
