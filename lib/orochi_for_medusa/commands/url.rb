@@ -100,7 +100,7 @@ EOS
 		outputs =  pstdout.read
 		outputs.each_line do |line|
           line = line.strip
-          line.gsub!(/^\s+/," ")
+          line.gsub!(/\s+/," ")
           next if line =~ /^$/
           stdout.puts line
           # ## typical output
