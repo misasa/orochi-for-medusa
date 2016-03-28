@@ -7,16 +7,17 @@ module OrochiForMedusa::Commands
 	  opts = OptionParser.new do |opt|
 		opt.banner = <<-"EOS".unindent
 NAME
-    #{program_name} - Obtain page from a Medusa URL output rendered text
+    #{program_name} - Show record in starndard output by curl and w3m
 
 SYNOPSIS AND USAGE
     #{program_name} [options] [URL]
 
 DESCRIPTION
-    Obtain aage and render a Medusa URLObtain page from a Medusa URL output
-    rendered text.  This will obtain page content by `curl' through basic
-    authorization and render it by `w3m', then filter out header and footer
-    by itself.  This gets authorization information from `~/.orochirc'.
+    Show record in starndard output by curl and w3m.  Really this
+    obtains page and render a Medusa URL rendered text.  This will
+    obtain page content by `curl' through basic authorization and
+    render it by `w3m', then filter out header and footer by itself.
+    This gets authorization information from `~/.orochirc'.
 
     Essence of this program is shown below.
       curl --user user:password -s http://database.misasa.okayama-u.ac.jp/stone/specimens/634 |

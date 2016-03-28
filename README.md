@@ -43,7 +43,7 @@ Commands are summarized as:
 | orochi-stone-in-box  | Convert stone to box                             |
 | orochi-uniq          | Repeat only one stone in family                  |
 | orochi-upload        | Upload jpg files in current directory            |
-| orochi-url           | Retrive url using curl and w3m                   |
+| orochi-url           | Show record in starndard output by curl and w3m  |
 
 
 # Usage
