@@ -30,7 +30,6 @@ Commands are summarized as:
 | orochi-download      | Download full datasets for polyfamilies          |
 | orochi-find          | Search Medusa by keyword                         |
 | orochi-help          | Show commands                                    |
-| orochi-info          | Open record by w3m                               |
 | orochi-label         | Create barcode label of Medusa-ID and stone-name |
 | orochi-ls            | List box contents                                |
 | orochi-mkstone       | Create a stone (or box) and print barcode        |
