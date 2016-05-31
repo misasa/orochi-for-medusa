@@ -12,7 +12,7 @@ module OrochiForMedusa::Commands
 
 					DESCRIPTION 
 						Print full tenant hierarchy of orochi working box.  With option,
-						print full genetic hierarchy of the orochi woking stone.  If
+						print full genetic hierarchy of the orochi working stone.  If
 						argument is empty, box or stone in environmental variable
 						OROCHI_PWD is surveyed.
 
