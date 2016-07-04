@@ -6,13 +6,13 @@ module OrochiForMedusa::Commands
 			opts = OptionParser.new do |opt|
 				opt.banner = <<-"EOS".unindent
 					NAME
-						#{program_name} - Download full datasets for polyfamilies
+						#{program_name} - Download full datasets for poly families
 
 					SYNOPSIS
 						#{program_name} [options] id0 [id1 ...]
 
 					DESCRIPTION
-						Download full datasets for polyfamilies.  The downloaded datasets
+						Download full datasets for poly families.  The downloaded datasets
 						are organized by each family in a name of their godfather.  Feed
 						stone, box, or bib that return a stone in a family by orochi-ls.
 						This program calls external programs sequentially as shown below.

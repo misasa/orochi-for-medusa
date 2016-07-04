@@ -27,7 +27,7 @@ Commands are summarized as:
 | -------------------- | ------------------------------------------------ |
 | orochi-cd            | Change the orochi working box                    |
 | orochi-ditto         | Clone box recursively                            |
-| orochi-download      | Download full datasets for polyfamilies          |
+| orochi-download      | Download full datasets for poly families         |
 | orochi-find          | Search Medusa by keyword                         |
 | orochi-help          | Show series of commands                          |
 | orochi-label         | Create barcode label of Medusa-ID and stone-name |
@@ -43,7 +43,7 @@ Commands are summarized as:
 | orochi-stone-in-box  | Convert stone to box                             |
 | orochi-uniq          | Repeat only one stone in family                  |
 | orochi-upload        | Upload jpg files in current directory            |
-| orochi-url           | Show record in starndard output by curl and w3m  |
+| orochi-url           | Show record in standard output by curl and w3m   |
 
 
 # Usage
