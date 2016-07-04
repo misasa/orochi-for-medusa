@@ -29,7 +29,7 @@ Commands are summarized as:
 | orochi-ditto         | Clone box recursively                            |
 | orochi-download      | Download full datasets for polyfamilies          |
 | orochi-find          | Search Medusa by keyword                         |
-| orochi-help          | Show commands                                    |
+| orochi-help          | Show series of commands                          |
 | orochi-label         | Create barcode label of Medusa-ID and stone-name |
 | orochi-ls            | List box contents                                |
 | orochi-mkstone       | Create a stone (or box) and print barcode        |
