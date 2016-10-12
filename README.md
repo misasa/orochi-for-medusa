@@ -2,6 +2,10 @@
 
 Provide command-line interface to Medusa
 
+# Dependency
+
+## [medusa_rest_client](https://github.com/misasa/medusa_rest_client "follow instruction")
+
 # Installation
 
 Add this line to your application's Gemfile:
