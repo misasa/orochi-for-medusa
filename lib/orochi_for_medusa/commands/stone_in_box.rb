@@ -15,7 +15,7 @@ module OrochiForMedusa::Commands
 						Transform stone to box.  This program changes the class of stone
 						to box by follwing steps.
 
-						(1) Create a new box with same name of specfied stone.
+						(1) Create a new box with same name of specified stone.
 
 						(2) Copy attachments of stone to the box.
 
