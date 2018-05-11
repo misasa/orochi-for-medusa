@@ -15,6 +15,8 @@ module OrochiForMedusa::Commands
 						option is specified.
 
 					EXAMPLE
+                        > #{program_name} 20151127162008-525174 "ID-0201(IC-0201?)"
+
 						When you want to set -1 to quantity, insert `--'.
 						> #{program_name} 20140827154239-812605 --quantity -- -1
 
