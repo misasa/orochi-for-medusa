@@ -8,10 +8,11 @@ module OrochiForMedusa::Commands
 					    #{program_name} - Store a stone to a box
 
 					SYNOPSIS
-					    #{program_name} [options] stone [stone2 ... ] box
-					    #{program_name} [options] child [child2 ... ] parent
-					    #{program_name} [options] stone [stone2 ... ] bib
-					    #{program_name} [options] stone [stone2 ... ] place
+					    #{program_name} [options] stone    [stone2 ... ] box
+					    #{program_name} [options] child    [child2 ... ] parent
+					    #{program_name} [options] stone    [stone2 ... ] bib
+					    #{program_name} [options] stone    [stone2 ... ] place
+					    #{program_name} [options] analysis [stone2 ... ] stone
 
 					DESCRIPTION
 					   Store a stone to a box.  Or set parent or equivalent of children.
@@ -34,7 +35,6 @@ module OrochiForMedusa::Commands
 				EOS
 				opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
 				opt.on("-i", "--interactive", "Run interactively") {|v| OPTS[:interactive] = v}
-
 			end
 			opts
 		end
