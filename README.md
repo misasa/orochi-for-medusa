@@ -2,6 +2,10 @@
 
 Provide command-line interface to Medusa
 
+# Description
+
+Provide command-line interface to Medusa
+
 # Dependency
 
 ## [medusa_rest_client](https://github.com/misasa/medusa_rest_client "follow instruction")
