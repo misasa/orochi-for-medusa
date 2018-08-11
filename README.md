@@ -1,10 +1,12 @@
 # orochi-for-medusa
 
-Provide command-line interface to Medusa
+A series of command-line utilities that manipulates records in Medusa
 
 # Description
 
-Provide command-line interface to Medusa
+A series of command-line utilities that manipulates records in Medusa.
+The utilities list, name, and find records in Medusa as GNU utilities
+do to files.
 
 # Dependency
 
