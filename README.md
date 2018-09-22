@@ -1,4 +1,4 @@
-# orochi-for-medusa
+# gem package -- orochi-for-medusa
 
 A series of command-line utilities that manipulates records in Medusa
 
