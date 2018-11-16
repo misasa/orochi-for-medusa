@@ -14,17 +14,7 @@ do to files.
 
 # Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'orochi-for-medusa'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install the package by yourself as:
 
     $ gem source -a http://dream.misasa.okayama-u.ac.jp/rubygems
     $ gem install orochi-for-medusa
