@@ -1,6 +1,6 @@
 # gem package -- orochi-for-medusa
 
-A series of command-line utilities that manipulates records in Medusa
+Ruby package to manipulate records in Medusa.
 
 # Description
 
