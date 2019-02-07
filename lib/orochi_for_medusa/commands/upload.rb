@@ -20,14 +20,30 @@ module OrochiForMedusa::Commands
                         This is because stone-ID to be correlated with, should be specified
                         in pmlfile.
 
+            When this program finds imageometry file file
+            `my-spots-picture.geo' (Affine matrix of xy-on-image to vs
+            space), it also uploads it.  Use `vs_attach_image.m' to
+            create the imageometry file.  An example of the
+            imageometry file is shown below.
+
+            $ cat my-spots-picture.geo
+            affine_xy2vs:
+            - [1.2, 0.0,  4.2]
+            - [0.0, 1.2, -1.3]
+            - [  0,   0,  1.0]
+
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp
             casteml upload
             orochi-mkstone
+            vs_attach_image.m
+
+          HISTORY
+            February 8, 2019: Upload also imageometry file if it exists
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2016, Okayama University
+            Copyright (C) 2015-2019, Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
