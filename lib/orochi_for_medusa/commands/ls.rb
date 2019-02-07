@@ -1,9 +1,9 @@
 require 'orochi_for_medusa/cui'
 module OrochiForMedusa::Commands
-	class Ls < OrochiForMedusa::Cui
-		def option_parser
-			opts = OptionParser.new do |opt|
-				opt.banner = <<-"EOS".unindent
+  class Ls < OrochiForMedusa::Cui
+    def option_parser
+      opts = OptionParser.new do |opt|
+        opt.banner = <<-"EOS".unindent
           NAME
             #{program_name} - List box contents
 
@@ -31,13 +31,13 @@ module OrochiForMedusa::Commands
             orochi-name
             http://dream.misasa.okayama-u.ac.jp
 
-					IMPLEMENTATION
-						Orochi, version 9
-						Copyright (C) 2015 Okayama University	
-						License GPLv3+: GNU GPL version 3 or later
+          IMPLEMENTATION
+            Orochi, version 9
+            Copyright (C) 2015 Okayama University 
+            License GPLv3+: GNU GPL version 3 or later
 
-					OPTIONS
-				EOS
+          OPTIONS
+        EOS
           opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
           opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
           # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
@@ -49,13 +49,13 @@ module OrochiForMedusa::Commands
           opt.on("--stone", "Show list of stones") {|v| OPTS[:stone] = v}
           opt.on("--box", "Show list of boxes") {|v| OPTS[:box] = v}
           # opt.on("--relatives", "Show related records") {|v| OPTS[:relatives] = v}
-			end
-			opts
-		end
+      end
+      opts
+    end
 
 
 
-		def execute
+    def execute
       if argv.length < 1
         ids = [ENV["OROCHI_PWD"]]
       else
@@ -74,7 +74,7 @@ module OrochiForMedusa::Commands
           end
       end
 
-		end
+    end
 
 
     def ls(arg)
@@ -173,7 +173,7 @@ module OrochiForMedusa::Commands
     end
 
 
-	end
+  end
 
 
 

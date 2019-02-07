@@ -8,7 +8,7 @@ require "logger"
 require "medusa_rest_client"
 require "unindent"
 module OrochiForMedusa
-	include MedusaRestClient
+  include MedusaRestClient
 
   # Your code goes here...
 end
