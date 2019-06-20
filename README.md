@@ -21,6 +21,13 @@ Install the package by yourself as:
     $ gem source -a http://dream.misasa.okayama-u.ac.jp/rubygems/
     $ gem install orochi-for-medusa
 
+The program reads a configuration file `~/.orochirc`.  The file should look like below.
+
+    ---
+    uri: dream.misasa.okayama-u.ac.jp/demo
+    user: admin
+    password: admin
+
 # Commands
 
 Commands are summarized as:
