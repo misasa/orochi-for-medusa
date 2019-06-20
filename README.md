@@ -24,7 +24,7 @@ Install the package by yourself as:
 The program reads a configuration file `~/.orochirc`.  The file should look like below.
 
     ---
-    uri: dream.misasa.okayama-u.ac.jp/demo
+    uri: https://dream.misasa.okayama-u.ac.jp/demo
     user: admin
     password: admin
 
