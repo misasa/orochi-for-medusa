@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     orochi-for-medusa (1.0.3)
-      medusa_rest_client (~> 0.1)
+      medusa_rest_client (~> 0.1.12)
       unindent
 
 GEM
@@ -28,7 +28,7 @@ GEM
     gli (2.19.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    medusa_rest_client (0.1.11)
+    medusa_rest_client (0.1.12)
       activeresource (~> 4.0.0)
       gli (~> 2.12)
       pry (~> 0.9)

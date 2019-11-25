@@ -52,7 +52,7 @@ module OrochiForMedusa::Commands
       OPTS[:nobox]  = :v if parent_id == "/"
 
       parent_obj  = Record.find(parent_id) unless OPTS[:nobody] or OPTS[:nobox]
-            # p parent_obj       if OPTS[:verbose]
+            p parent_obj       if OPTS[:verbose]
             if OPTS[:verbose]
         # child_obj = child_obj.reload
               print "--> parent_obj "
