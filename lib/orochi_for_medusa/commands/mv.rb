@@ -11,6 +11,7 @@ module OrochiForMedusa::Commands
               #{program_name} [options] stone    [stone2 ... ] box
               #{program_name} [options] child    [child2 ... ] parent
               #{program_name} [options] stone    [stone2 ... ] bib
+              #{program_name} [options] stone    [stone2 ... ] table
               #{program_name} [options] stone    [stone2 ... ] place
               #{program_name} [options] analysis [stone2 ... ] stone
 
