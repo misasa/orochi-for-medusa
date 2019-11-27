@@ -1,0 +1,18 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ruby:2.2.10
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: test with Rspec
+        run: |
+          gem install bundler --no-document
+          bundle install --jobs 4 --retry 3
+          bundle exec rspec
