@@ -1,4 +1,4 @@
-name: Ruby
+name: Ruby-2.2
 
 on: [push]
 
@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: test with Rspec
         run: |
+          gem install bundler -v 1.17.3
           gem install bundler --no-document
           bundle install --jobs 4 --retry 3
           bundle exec rspec
