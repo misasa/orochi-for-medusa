@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: test with Rspec
         run: |
-          gem install bundler -v 1.17.3
-          gem install bundler --no-document
+          gem install bundler -v 1.17.3 --no-document
           bundle install --jobs 4 --retry 3
           bundle exec rspec
