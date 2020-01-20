@@ -42,6 +42,15 @@ module OrochiForMedusa::Commands
         }
       end
 
+      context "with png" do
+        let(:file){ "0000-0001.png" }
+
+        it {
+          expect(AttachmentFile).to receive(:upload).with(file)
+          subject
+        }
+      end
+
       context "with pml" do
         let(:file){ "0000-0001.pml" }
 
@@ -50,13 +59,6 @@ module OrochiForMedusa::Commands
           subject
         }
       end
-
-      # it {
-      #   subject
-      #   expect(cui.instance_variable_get(:@godfathers)).to include(obj)       
-      #   expect(cui.instance_variable_get(:@args)).to include(obj)
-      # }
-
     end
 
 
@@ -72,7 +74,6 @@ module OrochiForMedusa::Commands
         let(:args){ [] }
         let(:id){ '0001'}
 
-
         it {
           expect(stdin).to receive(:gets).and_return(id, nil)
           expect(cui).to receive(:upload).with(id)
@@ -85,6 +86,17 @@ module OrochiForMedusa::Commands
         let(:id){ '0001'}
         it {
           expect(cui).to receive(:upload).with(id)
+          subject
+        }
+      end
+
+      describe "with surface option", :current => true do
+        let(:args){ [file, "--surface_id=#{surface_id}"] }
+        let(:file){ '0001.jpg'}
+        let(:surface_id){ '20190426194547-039018' }
+        it {
+          expect(cui).to receive(:upload_to_surface).with([file], surface_id)
+          #expect(cui).to receive(:upload).with(file)
           subject
         }
       end

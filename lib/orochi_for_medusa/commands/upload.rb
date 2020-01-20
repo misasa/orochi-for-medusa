@@ -49,6 +49,8 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("--surface_id=VALUE", "Link to surface") {|v| OPTS[:surface_id] = v}
+        #opt.parse!(ARGV)
       end
       opts
     end
@@ -60,6 +62,8 @@ module OrochiForMedusa::Commands
             upload(file)
           end
         end
+      elsif OPTS[:surface_id]
+          upload_to_surface(argv, OPTS[:surface_id])       
       else argv.each do |file|
           upload(file)
         end
@@ -68,17 +72,20 @@ module OrochiForMedusa::Commands
 
     def upload(arg)
       ext = File.extname(arg)
-      if ext.downcase == ".jpg"
-        img = AttachmentFile.upload(arg)
-        p img
-      elsif ext.downcase == ".pml"
+      if ext.downcase == ".pml"
         cmd = "casteml upload #{arg}"
         puts cmd
         system_execute(cmd)
       else
-        puts "unsupported file extension"
+         attach = AttachmentFile.upload(arg)
+         p attach
       end
     end
 
+    def upload_surface(f, surface_id)
+      ActiveResource::Base.logger = Logger.new(STDOUT) if OPTS[:verbose];
+      #"include MedusaRestClient; ActiveResource::Base.logger = Logger.new(STDOUT); f = %w($(MASTER_IMG) $(TARGET_IMG)); s = Record.find('$(SURFACE)'); i=s.images.map{|t| t.image }; n = i.map{|t| t.name.sub('_','x')};f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}" 
+      s = Record.find(surface_id);i=s.images.map{|t| t.image };n = i.map{|t| t.name.sub('_','x')};f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))} 
+    end
   end
 end
