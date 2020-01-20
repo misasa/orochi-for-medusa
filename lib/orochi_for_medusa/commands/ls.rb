@@ -21,6 +21,7 @@ module OrochiForMedusa::Commands
             To obtain list of daughters, issue either followings.
             $ orochi-ls      20150327112504-048340
             $ orochi-ls --id 20150327112504-048340 | orochi-pwd
+            $ orochi-ls --id --recursive 20150327112504-048340 20101015100407679.hkitagawa
 
             To obtain stone tree, issue following.
             $ orochi-ls -r --id 20150327112504-048340 | orochi-pwd
@@ -33,7 +34,7 @@ module OrochiForMedusa::Commands
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University 
+            Copyright (C) 2015-2019 Okayama University 
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS

@@ -11,14 +11,15 @@ module OrochiForMedusa::Commands
             #{program_name} [options] file0 [file1 ...]
 
           DESCRIPTION
-            Upload any files to Medusa.  Note that casteml files are treated
-            in special way.  For files of `*.pml', an external program
-            `casteml upload' is invoked.  For stone registration, call
-            `orochi-mkstone' instead of this program.
+            Upload files to service run by Medusa.  Note that casteml
+            files are treated in special way.  For files of `*.pml',
+            an external program `casteml upload' is called.  For
+            stone registration, call `orochi-mkstone' instead of this
+            program.
 
-            Note that `casteml upload' does not take stone-ID as an option.
-                        This is because stone-ID to be correlated with, should be specified
-                        in pmlfile.
+            Note that `casteml upload' does not take stone-ID as an
+            option.  This is because stone-ID to be correlated with,
+            should be specified in pmlfile.
 
             When this program finds imageometry file file
             `my-spots-picture.geo' (Affine matrix of xy-on-image to vs
