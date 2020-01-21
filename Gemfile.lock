@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    orochi-for-medusa (1.0.4)
+    orochi-for-medusa (1.0.5)
       medusa_rest_client (>= 0.1.12)
       unindent
 
