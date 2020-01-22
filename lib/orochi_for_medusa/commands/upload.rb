@@ -34,8 +34,9 @@ module OrochiForMedusa::Commands
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
-            For surface image registration, specify the surface with `--surface_id=ID' option 
-            and the layer with `--layer=LAYER_NAME' option. 
+            To upload an image onto a layer of a surface, specify the surface
+            and the layer with `--layer' and `--surface_id' option.
+          
           EXAMPLE
             $ ls
             my-spots-picture.jpg my-spots-picture.geo
@@ -52,6 +53,7 @@ module OrochiForMedusa::Commands
           HISTORY
             February 8, 2019: Upload also imageometry file if it exists
             January 20, 2020: Add options to specify surface and layer to upload image
+        
           IMPLEMENTATION
             Orochi, version 9
             Copyright (C) 2015-2019, Okayama University
@@ -60,8 +62,8 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--surface_id=VALUE", "Specify the surface to upload image") {|v| OPTS[:surface_id] = v}
-        opt.on("--layer=LAYER_NAME", "Specify the layer to link image (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
+        opt.on("--surface_id=VALUE", "Link to a surface") {|v| OPTS[:surface_id] = v}
+        opt.on("--layer=LAYER_NAME", "Link to a layer (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
         #opt.parse!(ARGV)
       end
       opts
