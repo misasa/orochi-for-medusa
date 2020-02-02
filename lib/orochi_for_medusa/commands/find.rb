@@ -21,6 +21,7 @@ module OrochiForMedusa::Commands
           SEE ALSO
             orochi-name
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/find.rb
 
           IMPLEMENTATION
             Orochi, version 9

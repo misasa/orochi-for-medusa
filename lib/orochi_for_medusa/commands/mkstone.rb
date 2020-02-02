@@ -16,6 +16,7 @@ module OrochiForMedusa::Commands
         SEE ALSO
             orochi-upload
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/mkstone.rb
 
           IMPLEMENTATION
             Orochi, version 9

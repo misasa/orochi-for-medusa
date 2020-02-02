@@ -31,6 +31,7 @@ module OrochiForMedusa::Commands
             orochi-pwd
             orochi-name
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/ls.rb
 
           IMPLEMENTATION
             Orochi, version 9

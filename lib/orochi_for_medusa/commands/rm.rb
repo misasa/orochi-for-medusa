@@ -16,10 +16,11 @@ module OrochiForMedusa::Commands
           SEE ALSO
             orochi-find
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/rm.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS

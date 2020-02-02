@@ -4,31 +4,32 @@ module OrochiForMedusa::Commands
 
     # def option_parser
     #   opts = OptionParser.new do |opt|
-  #         opt.banner = <<-"EOS".unindent
+    #       opt.banner = <<-"EOS".unindent
     #       NAME
     #           orochi- - Change the orochi working box
-
+    #
     #       SYNOPSIS
     #           #{program_name} [options] box-path
-
+    #
     #       DESCRIPTION
     #           Change the orochi working box.  Set the working box to
     #           environmental variable OROCHI_PWD.
-
+    #
     #       SEE ALSO
     #           orochi-ls
     #           orochi-pwd
     #           http://dream.misasa.okayama-u.ac.jp
-
+    #           https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/help.rb
+    #
     #       IMPLEMENTATION
     #           Orochi, version 9
-    #           Copyright (C) 2015 Okayama University
+    #           Copyright (C) 2015-2020 Okayama University
     #           License GPLv3+: GNU GPL version 3 or later
 
     #       OPTIONS
     #     EOS
     #     opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-  #         opt.on("--id", "Show IDs") {|v| OPTS[:id] = v}
+    #     opt.on("--id", "Show IDs") {|v| OPTS[:id] = v}
     #   end
     #   opts
     # end

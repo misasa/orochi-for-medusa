@@ -5,13 +5,13 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Upload any files to Medusa 9
+            #{program_name} - Upload any files to service by Medusa
 
           SYNOPSIS
             #{program_name} [options] file0 [file1 ...]
 
           DESCRIPTION
-            Upload image and casteml files to service run by Medusa.
+            Upload image and casteml files to service by Medusa.
             For image, png and jpg files are accepted.  Note that casteml
             files are treated in special way.  For files of `*.pml',
             an external program `casteml upload' is called.  For
@@ -49,6 +49,7 @@ module OrochiForMedusa::Commands
             casteml upload
             orochi-mkstone
             vs_attach_image.m
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/upload.rb
 
           HISTORY
             February 8, 2019: Upload also imageometry file if it exists
@@ -77,10 +78,10 @@ module OrochiForMedusa::Commands
           end
         end
       elsif OPTS[:surface_id]
-          upload_to_surface(argv, OPTS[:surface_id])       
+        upload_to_surface(argv, OPTS[:surface_id])       
       else argv.each do |file|
-          upload(file)
-        end
+             upload(file)
+           end
       end
     end
 
@@ -91,8 +92,8 @@ module OrochiForMedusa::Commands
         puts cmd
         system_execute(cmd)
       elsif [".jpg", ".png", ".JPG", ".PNG", ".jpeg", ".JPEG"].include?(ext.downcase)
-         attach = AttachmentFile.upload(arg)
-         p attach
+        attach = AttachmentFile.upload(arg)
+        p attach
       else
         puts "unsupported file extension"
       end

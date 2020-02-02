@@ -89,14 +89,14 @@ module OrochiForMedusa::Commands
       if OPTS[:godfather]
         @godfathers.each do |godfather|
           output(godfather)
-        end       
+        end
       else
         @args.each do |arg|
           output(arg)
-        end       
+        end
       end
 
-    end 
+    end
 
   end
 end

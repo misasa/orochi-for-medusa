@@ -5,28 +5,29 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-              #{program_name} - Store a stone to a box
+            #{program_name} - Store a stone to a box
 
           SYNOPSIS
-              #{program_name} [options] stone    [stone2 ... ] box
-              #{program_name} [options] stone    [child2 ... ] stone-parent
-              #{program_name} [options] stone    [stone2 ... ] bib
-              #{program_name} [options] stone    [stone2 ... ] table
-              #{program_name} [options] stone    [stone2 ... ] place
-              #{program_name} [options] analysis [stone2 ... ] stone
+            #{program_name} [options] stone    [stone2 ... ] box
+            #{program_name} [options] stone    [child2 ... ] stone-parent
+            #{program_name} [options] stone    [stone2 ... ] bib
+            #{program_name} [options] stone    [stone2 ... ] table
+            #{program_name} [options] stone    [stone2 ... ] place
+            #{program_name} [options] analysis [stone2 ... ] stone
 
           DESCRIPTION
-             Store a stone to a box.  Or set a stone as a child.
-             Or linke a stone to bib, table, and place.  Or link an analysis
-             to stone.  To rename stone (or something else) use `orochi-rename'.
+            Store a stone to a box.  Or set a stone as a child.
+            Or linke a stone to bib, table, and place.  Or link an analysis
+            to stone.  To rename stone (or something else) use `orochi-rename'.
 
-             To cut parent-children relationships, feed `nobody' as last
-             argument instead of parent ID.  In a smilar fashion, to remove
-             stone from box, feed `/' as last argument instead of box ID.
+            To cut parent-children relationships, feed `nobody' as last
+            argument instead of parent ID.  In a smilar fashion, to remove
+            stone from box, feed `/' as last argument instead of box ID.
 
           SEE ALSO
-              orochi-rename
-              http://dream.misasa.okayama-u.ac.jp
+            orochi-rename
+            http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/mv.rb
 
           IMPLEMENTATION
             Orochi, version 9

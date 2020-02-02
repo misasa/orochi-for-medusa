@@ -10,7 +10,7 @@ module OrochiForMedusa::Commands
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
-          DESCRIPTION 
+          DESCRIPTION
             Print full tenant hierarchy of orochi working box.  With option,
             print full genetic hierarchy of the orochi working stone.  If
             argument is empty, box or stone in environmental variable
@@ -20,15 +20,16 @@ module OrochiForMedusa::Commands
             orochi-cd
             orochi-ls
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/pwd.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
         EOS
-        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}        
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("--stone", "Print genetic hierarchy") {|v| OPTS[:stone] = v}
         opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
         opt.on("--top", "Show godfather") {|v| OPTS[:top] = v}
@@ -43,19 +44,19 @@ module OrochiForMedusa::Commands
       else
         ids = argv.clone
       end
-      
+
       if ids.join.blank?
           while answer = stdin.gets do
             answer.split.each do |arg|
                 pwd(arg)
             end
           end
-      else 
+      else
         ids.each do |arg|
               pwd(arg)
           end
       end
-    end 
+    end
 
         def get_ancestors(obj)
           objs = []
@@ -70,7 +71,7 @@ module OrochiForMedusa::Commands
     def pwd(arg)
         obj = Record.find_by_id_or_path(arg)
         if OPTS[:stone]
-          objs = get_ancestors(obj)    
+          objs = get_ancestors(obj)
         else
           box = obj.box
           if box

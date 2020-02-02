@@ -12,8 +12,8 @@ module OrochiForMedusa::Commands
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Transform stone to box.  This program changes the class of stone
-            to box by follwing steps.
+            Transform stone to box.  This program changes the class of
+            stone to box by follwing steps.
 
             (1) Create a new box with same name of specified stone.
 
@@ -28,10 +28,11 @@ module OrochiForMedusa::Commands
             orochi-mv
             orochi-rename
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/stone_in_box.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -53,8 +54,8 @@ module OrochiForMedusa::Commands
       else argv.each do |id|
           get_and_put(id)
         end
-      end     
-    end 
+      end
+    end
 
 
     def get_and_put(id)
