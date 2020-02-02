@@ -46,58 +46,57 @@ module OrochiForMedusa::Commands
       end
 
       if ids.join.blank?
-          while answer = stdin.gets do
-            answer.split.each do |arg|
-                pwd(arg)
-            end
+        while answer = stdin.gets do
+          answer.split.each do |arg|
+            pwd(arg)
           end
+        end
       else
         ids.each do |arg|
-              pwd(arg)
-          end
+          pwd(arg)
+        end
       end
     end
 
-        def get_ancestors(obj)
-          objs = []
-          objs.unshift(obj)
-          while obj.parent.present?
-            obj = obj.parent
-            objs.unshift(obj)
-          end
-          objs
-        end
-
-    def pwd(arg)
-        obj = Record.find_by_id_or_path(arg)
-        if OPTS[:stone]
-          objs = get_ancestors(obj)
-        else
-          box = obj.box
-          if box
-              objs = get_ancestors(box)
-              objs.push(obj)
-          else
-              objs = [box]
-          end
-        end
-        objs = [objs.shift] if OPTS[:top]
-        if objs == [nil]
-          stdout.puts '/'
-        else
-          if OPTS[:id]
-              objs.each do |obj|
-                stdout.puts obj.global_id
-              end
-          else
-              if OPTS[:top]
-                stdout.puts objs.map{|obj| obj.name }.join('/')
-              else
-                stdout.puts '/' + objs.map{|obj| obj.name }.join('/')
-              end
-          end
-        end
+    def get_ancestors(obj)
+      objs = []
+      objs.unshift(obj)
+      while obj.parent.present?
+        obj = obj.parent
+        objs.unshift(obj)
+      end
+      objs
     end
 
+    def pwd(arg)
+      obj = Record.find_by_id_or_path(arg)
+      if OPTS[:stone]
+        objs = get_ancestors(obj)
+      else
+        box = obj.box
+        if box
+          objs = get_ancestors(box)
+          objs.push(obj)
+        else
+          objs = [box]
+        end
+      end
+      objs = [objs.shift] if OPTS[:top]
+      if objs == [nil]
+        stdout.puts '/'
+      else
+        if OPTS[:id]
+          objs.each do |obj|
+            stdout.puts obj.global_id
+          end
+        else
+          if OPTS[:top]
+            stdout.puts objs.map{|obj| obj.name }.join('/')
+          else
+            stdout.puts '/' + objs.map{|obj| obj.name }.join('/')
+          end
+        end
+      end
+    end
   end
 end

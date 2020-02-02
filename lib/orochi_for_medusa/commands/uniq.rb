@@ -44,7 +44,6 @@ module OrochiForMedusa::Commands
       opts
     end
 
-
     def get_and_put(id)
       obj = Record.find_by_id_or_path(id)
       arg = obj
@@ -70,7 +69,6 @@ module OrochiForMedusa::Commands
       end
     end
 
-
     def execute
       @args = []
       @godfathers = []
@@ -82,8 +80,8 @@ module OrochiForMedusa::Commands
           end
         end
       else argv.each do |id|
-          get_and_put(id)
-        end
+             get_and_put(id)
+           end
       end
 
       if OPTS[:godfather]
@@ -95,8 +93,6 @@ module OrochiForMedusa::Commands
           output(arg)
         end
       end
-
     end
-
   end
 end

@@ -37,7 +37,6 @@ module OrochiForMedusa::Commands
       opts
     end
 
-
     def get_and_put(id)
       obj = Record.find(id)
       attributes = [obj.name]
@@ -59,6 +58,5 @@ module OrochiForMedusa::Commands
         end
       end
     end
-
   end
 end

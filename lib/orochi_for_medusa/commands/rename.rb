@@ -51,8 +51,8 @@ module OrochiForMedusa::Commands
       obj = Record.find(id)
       p obj if OPTS[:verbose]
       if OPTS[:id]
-        # obj.id                = newparam
-        # obj.update_record_property({:id => newparam})
+      # obj.id                = newparam
+      # obj.update_record_property({:id => newparam})
       # elsif OPTS[:stone]
       #   obj.stone_type        = newparam
       elsif OPTS[:description]
@@ -79,7 +79,6 @@ module OrochiForMedusa::Commands
       end
       puts obj.save
       p obj.reload if OPTS[:verbose]
-
     end
 
     def execute

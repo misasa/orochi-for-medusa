@@ -40,10 +40,10 @@ module OrochiForMedusa::Commands
           end
         end
       else argv.each do |id|
-          get_and_rm(id)
-        end
-      end     
-    end 
+             get_and_rm(id)
+           end
+      end
+    end
 
     def get_and_rm(arg)
       # id.each do |arg|
@@ -66,7 +66,5 @@ module OrochiForMedusa::Commands
       obj.destroy
       # end
     end
-
-
   end
 end

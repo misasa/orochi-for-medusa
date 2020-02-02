@@ -44,7 +44,6 @@ SEE ALSO
   http://dream.misasa.okayama-u.ac.jp
   https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/url.rb
 
-
 IMPLEMENTATION
   Orochi, version 9
   Copyright (C) 2015-2020 Okayama University

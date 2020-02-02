@@ -52,11 +52,10 @@ module OrochiForMedusa::Commands
           end
         end
       else argv.each do |id|
-          get_and_put(id)
-        end
+             get_and_put(id)
+           end
       end
     end
-
 
     def get_and_put(id)
       @output = stdout
@@ -113,8 +112,5 @@ module OrochiForMedusa::Commands
       box_obj.relatives << stone_obj
       @output.puts "done" if OPTS[:interactive]
     end
-
-
-
   end
 end

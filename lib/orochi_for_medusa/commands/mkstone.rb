@@ -31,7 +31,6 @@ module OrochiForMedusa::Commands
         opt.on("-T image", "--upload-file image", "Run upload_file") {|v| OPTS[:upload_file] = v}
         opt.on("-x", "--box", "Make a box") {|v| OPTS[:mkbox] = v}
         opt.on("--label", "NOT print barcode") {|v| OPTS[:label] = v}
-
       end
       opts
     end
@@ -40,7 +39,6 @@ module OrochiForMedusa::Commands
       raise "specify name" if argv.length != 1
       stonename = argv[0]
       mkstone(stonename)
-
     end
 
     def mkstone(stonename)

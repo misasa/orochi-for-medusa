@@ -40,22 +40,20 @@ module OrochiForMedusa::Commands
 
           OPTIONS
         EOS
-          opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-          opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
-          # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
-          opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
-          opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
-          opt.on("--analysis", "Show analysis records") {|v| OPTS[:analysis] = v}
-          opt.on("--file", "Show attachment_file records") {|v| OPTS[:file] = v}
-          opt.on("--bib", "Show bib records") {|v| OPTS[:bib] = v}
-          opt.on("--stone", "Show list of stones") {|v| OPTS[:stone] = v}
-          opt.on("--box", "Show list of boxes") {|v| OPTS[:box] = v}
-          # opt.on("--relatives", "Show related records") {|v| OPTS[:relatives] = v}
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
+        # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
+        opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
+        opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
+        opt.on("--analysis", "Show analysis records") {|v| OPTS[:analysis] = v}
+        opt.on("--file", "Show attachment_file records") {|v| OPTS[:file] = v}
+        opt.on("--bib", "Show bib records") {|v| OPTS[:bib] = v}
+        opt.on("--stone", "Show list of stones") {|v| OPTS[:stone] = v}
+        opt.on("--box", "Show list of boxes") {|v| OPTS[:box] = v}
+        # opt.on("--relatives", "Show related records") {|v| OPTS[:relatives] = v}
       end
       opts
     end
-
-
 
     def execute
       if argv.length < 1
@@ -65,15 +63,15 @@ module OrochiForMedusa::Commands
       end
       
       if ids.join.blank?
-          while answer = stdin.gets do
-            answer.split.each do |arg|
-                ls(arg)
-            end
+        while answer = stdin.gets do
+          answer.split.each do |arg|
+            ls(arg)
           end
+        end
       else 
         ids.each do |arg|
-              ls(arg)
-          end
+          ls(arg)
+        end
       end
 
     end
@@ -151,7 +149,6 @@ module OrochiForMedusa::Commands
       end
     end
 
-
     def census(obj)
       if OPTS[:box]
         tab_out(obj) if obj.kind_of?(Box)
@@ -173,10 +170,5 @@ module OrochiForMedusa::Commands
         end
       end
     end
-
-
   end
-
-
-
 end

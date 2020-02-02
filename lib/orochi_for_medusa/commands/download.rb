@@ -40,84 +40,80 @@ module OrochiForMedusa::Commands
 
           OPTIONS
         EOS
-          opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-          opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
-          opt.on("-p", "--pml", "export as pmlfile") {|v| OPTS[:pml] = v}
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
+        opt.on("-p", "--pml", "export as pmlfile") {|v| OPTS[:pml] = v}
         opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
       end
       opts
     end
 
-
-
     def execute
       ids = argv.clone
       if ids.join.blank?
-          while answer = stdin.gets do
-            answer.split.each do |arg|
-                get_and_put(arg)
-            end
+        while answer = stdin.gets do
+          answer.split.each do |arg|
+            get_and_put(arg)
           end
+        end
       else 
         ids.each do |arg|
-              get_and_put(arg)
-          end
+          get_and_put(arg)
+        end
       end
     end
 
     def get_and_put(id)
-        if OPTS[:recursive]
-          cmd = "orochi-ls --id -r #{id} | orochi-uniq"
+      if OPTS[:recursive]
+        cmd = "orochi-ls --id -r #{id} | orochi-uniq"
+      else
+        cmd = "orochi-ls --id #{id} | orochi-uniq"
+      end
+      if File.exist?("./deleteme.#{id}.d")
+        print "mkdir: deleteme.#{id}.d: File exists.  Move the directory.\n"
+        raise
+      else
+        cmd1 = "mkdir deleteme.#{id}.d"
+        p cmd1 if OPTS[:verbose]
+        system(cmd1)
+      end
+      p cmd if OPTS[:verbose]
+      Open3.popen3(cmd) do |stdin, stdout, stderr|
+        ids =  stdout.read
+        puts ids if OPTS[:verbose]
+        ids.each_line do |family_id|
+          puts family_id if OPTS[:verbose] 
+          cmd21 = "orochi-pwd --family --top #{family_id}"
+          p cmd21 if OPTS[:verbose]
+          Open3.popen3(cmd21) do |stdin, stdout, stderr|
+            @godfather =  stdout.read.chomp
+          end
+          temp = Tempfile.open(["tempml", ".pml"])
+          cmd22 = "casteml download -R #{family_id.chomp} > #{temp.path}"
+          p cmd22 if OPTS[:verbose]
+          system(cmd22)
+          cmd3 = "casteml convert -f pml --smash #{temp.path} | sed -e 's/average/#{@godfather}/g' > deleteme.#{id}.d/#{@godfather}.pml"
+          p cmd3 if OPTS[:verbose]
+          system(cmd3)
+        end
+        if OPTS[:o]
+          ext = File.extname(OPTS[:o])
+          outfile = File.basename(OPTS[:o], ext)
         else
-          cmd = "orochi-ls --id #{id} | orochi-uniq"
+          outfile = "Sheet1"
         end
-        if File.exist?("./deleteme.#{id}.d")
-          print "mkdir: deleteme.#{id}.d: File exists.  Move the directory.\n"
-          raise
-        else
-          cmd1 = "mkdir deleteme.#{id}.d"
-          p cmd1 if OPTS[:verbose]
-          system(cmd1)
+        cmd32 = "casteml join deleteme.#{id}.d/*.pml > #{outfile}.pml"
+        p cmd32 if OPTS[:verbose]
+        system(cmd32)
+        cmd4 = "casteml convert -f csv #{outfile}.pml > #{outfile}.csv"
+        p cmd4 if OPTS[:verbose]
+        system(cmd4)
+        unless OPTS[:pml]
+          cmd5 = "rm -rf deleteme.#{id}.d/"
+          p cmd5 if OPTS[:verbose]
+          system(cmd5)
         end
-        p cmd if OPTS[:verbose]
-        Open3.popen3(cmd) do |stdin, stdout, stderr|
-          ids =  stdout.read
-          puts ids if OPTS[:verbose]
-          ids.each_line do |family_id|
-              puts family_id if OPTS[:verbose] 
-              cmd21 = "orochi-pwd --family --top #{family_id}"
-              p cmd21 if OPTS[:verbose]
-              Open3.popen3(cmd21) do |stdin, stdout, stderr|
-                @godfather =  stdout.read.chomp
-              end
-              temp = Tempfile.open(["tempml", ".pml"])
-              cmd22 = "casteml download -R #{family_id.chomp} > #{temp.path}"
-              p cmd22 if OPTS[:verbose]
-              system(cmd22)
-              cmd3 = "casteml convert -f pml --smash #{temp.path} | sed -e 's/average/#{@godfather}/g' > deleteme.#{id}.d/#{@godfather}.pml"
-              p cmd3 if OPTS[:verbose]
-              system(cmd3)
-          end
-          if OPTS[:o]
-              ext = File.extname(OPTS[:o])
-              outfile = File.basename(OPTS[:o], ext)
-          else
-              outfile = "Sheet1"
-          end
-          cmd32 = "casteml join deleteme.#{id}.d/*.pml > #{outfile}.pml"
-          p cmd32 if OPTS[:verbose]
-          system(cmd32)
-          cmd4 = "casteml convert -f csv #{outfile}.pml > #{outfile}.csv"
-          p cmd4 if OPTS[:verbose]
-          system(cmd4)
-          unless OPTS[:pml]
-              cmd5 = "rm -rf deleteme.#{id}.d/"
-              p cmd5 if OPTS[:verbose]
-              system(cmd5)
-          end
-        end
+      end
     end
-
-
   end
 end

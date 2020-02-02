@@ -30,36 +30,35 @@ module OrochiForMedusa::Commands
 
           OPTIONS
         EOS
-        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}        
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("--name", "Display name") {|v| OPTS[:name] = v}
-                opt.on("--eq", "Exact match") {|v| OPTS[:eq] = v}
+        opt.on("--eq", "Exact match") {|v| OPTS[:eq] = v}
       end
       opts
     end
 
     def execute
       ids = argv.clone
-      
+
       if argv.length < 1
-          while answer = stdin.gets do
-            find(answer.chomp)
-          end
+        while answer = stdin.gets do
+          find(answer.chomp)
+        end
       elsif argv.length > 1
         puts opts
       else
         find(argv[0])
       end
-    end 
-
+    end
 
     def find(keyword)
       page = 1
       while true
-            if OPTS[:eq]
-            objs = Record.find(:all, :params =>{:q => {:name_eq => keyword}, :page => page})
-            else
+        if OPTS[:eq]
+          objs = Record.find(:all, :params =>{:q => {:name_eq => keyword}, :page => page})
+        else
           objs = Record.find(:all, :params =>{:q => {:name_or_global_id_cont => keyword}, :page => page})
-            end
+        end
         break if objs.size == 0
         objs.each do |obj|
           if OPTS[:name]
@@ -71,6 +70,5 @@ module OrochiForMedusa::Commands
         page += 1
       end
     end
-
   end
 end

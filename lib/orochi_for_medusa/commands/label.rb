@@ -38,10 +38,11 @@ module OrochiForMedusa::Commands
             :printer: KING JIM SR5900P-NW
 
           SEE ALSO
-            http://dream.misasa.okayama-u.ac.jp
             gem tepra
             gem medusa_rest_client
             tepra-duplicate
+            http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/label.rb
 
           IMPLEMENTATION
             Orochi, version 9
@@ -129,6 +130,5 @@ module OrochiForMedusa::Commands
         end
       end
     end
-
   end
 end

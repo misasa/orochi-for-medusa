@@ -36,7 +36,7 @@ module OrochiForMedusa::Commands
 
             To upload an image onto a layer of a surface, specify the surface
             and the layer with `--layer' and `--surface_id' option.
-          
+
           EXAMPLE
             $ ls
             my-spots-picture.jpg my-spots-picture.geo
@@ -45,16 +45,16 @@ module OrochiForMedusa::Commands
             $ orochi-upload my-spots-picture.jpg --surface_id=20181122134024-911579 --layer=top
 
           SEE ALSO
-            http://dream.misasa.okayama-u.ac.jp
             casteml upload
             orochi-mkstone
             vs_attach_image.m
+            http://dream.misasa.okayama-u.ac.jp
             https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/upload.rb
 
           HISTORY
             February 8, 2019: Upload also imageometry file if it exists
             January 20, 2020: Add options to specify surface and layer to upload image
-        
+
           IMPLEMENTATION
             Orochi, version 9
             Copyright (C) 2015-2019, Okayama University
@@ -78,7 +78,7 @@ module OrochiForMedusa::Commands
           end
         end
       elsif OPTS[:surface_id]
-        upload_to_surface(argv, OPTS[:surface_id])       
+        upload_to_surface(argv, OPTS[:surface_id])
       else argv.each do |file|
              upload(file)
            end
@@ -101,11 +101,11 @@ module OrochiForMedusa::Commands
 
     def upload_to_surface(f, surface_id)
       ActiveResource::Base.logger = Logger.new(STDOUT) if OPTS[:verbose];
-      #"include MedusaRestClient; ActiveResource::Base.logger = Logger.new(STDOUT); f = %w($(MASTER_IMG) $(TARGET_IMG)); s = Record.find('$(SURFACE)'); i=s.images.map{|t| t.image }; n = i.map{|t| t.name.sub('_','x')};f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}" 
+      # "include MedusaRestClient; ActiveResource::Base.logger = Logger.new(STDOUT); f = %w($(MASTER_IMG) $(TARGET_IMG)); s = Record.find('$(SURFACE)'); i=s.images.map{|t| t.image }; n = i.map{|t| t.name.sub('_','x')};f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}"
       s = Record.find(surface_id)
       i=s.images.map{|t| t.image }
-      #n = i.map{|t| t.name.sub('_','x')}
-      #f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))} 
+      # n = i.map{|t| t.name.sub('_','x')}
+      # f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}
       n = i.map{|t| t.name }
       f.each do |t|
         tt = File.basename(t).gsub('x','_').gsub(' ','_')
