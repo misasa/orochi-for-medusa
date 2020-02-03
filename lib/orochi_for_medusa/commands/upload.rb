@@ -23,26 +23,26 @@ module OrochiForMedusa::Commands
             should be specified in pmlfile.
 
             When this program finds imageometry file
-            `my-spots-picture.geo' (Affine matrix of xy-on-image to vs
+            `my-picture.geo' (Affine matrix of xy-on-image to vs
             space), it also uploads it.  Use `vs_attach_image.m' or
             `vs-attach-image --dry-run' to create the imageometry
             file.  An example of the imageometry file is shown below.
 
-            $ cat my-spots-picture.geo
+            $ cat my-picture.geo
             affine_xy2vs:
             - [1.2, 0.0,  4.2]
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
             To upload an image onto a layer of a surface, specify the surface
-            and the layer with `--layer' and `--surface_id' option.
+            and the layer by `--surface_id' and `--layer' options.
 
           EXAMPLE
             $ ls
-            my-spots-picture.jpg my-spots-picture.geo
-            $ orochi-upload my-spots-picture.jpg --surface_id=20181122134024-911579
-            $ orochi-upload my-spots-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer
-            $ orochi-upload my-spots-picture.jpg --surface_id=20181122134024-911579 --layer=top
+            my-picture.jpg my-picture.geo
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=top
 
           SEE ALSO
             casteml upload
