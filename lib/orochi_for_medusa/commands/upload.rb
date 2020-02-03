@@ -5,18 +5,18 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Upload any files to service by Medusa
+            #{program_name} - Upload image and casteml files to service by Medusa
 
           SYNOPSIS
             #{program_name} [options] file0 [file1 ...]
 
           DESCRIPTION
             Upload image and casteml files to service by Medusa.
-            For image, png and jpg files are accepted.  Note that casteml
-            files are treated in special way.  For files of `*.pml',
-            an external program `casteml upload' is called.  For
-            stone registration, call `orochi-mkstone' instead of this
-            program.
+            Image format of PNG and JPG but BMP are supported.  Note
+            that casteml files are treated in special way.  For files
+            of `*.pml', an external program `casteml upload' is
+            called.  For stone registration, call `orochi-mkstone'
+            instead of this program.
 
             Note that `casteml upload' does not take stone-ID as an
             option.  This is because stone-ID to be correlated with,
@@ -25,8 +25,8 @@ module OrochiForMedusa::Commands
             When this program finds imageometry file
             `my-spots-picture.geo' (Affine matrix of xy-on-image to vs
             space), it also uploads it.  Use `vs_attach_image.m' or
-            `vs-attach-image --dry-run' to create the imageometry file.
-            An example of the imageometry file is shown below.
+            `vs-attach-image --dry-run' to create the imageometry
+            file.  An example of the imageometry file is shown below.
 
             $ cat my-spots-picture.geo
             affine_xy2vs:
@@ -57,7 +57,7 @@ module OrochiForMedusa::Commands
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2019, Okayama University
+            Copyright (C) 2015-2020, Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
