@@ -34,6 +34,10 @@ module OrochiForMedusa::Commands
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
+            To upload an image with preffered name, specify the filename by
+            `--store-as' options. To upload images with preffered prefix, specify
+            the prefix by `--store-with-prefix' options. To upload images with preffered
+            suffix, specify the suffix by `--store-with-suffix' options.
             To upload an image onto a layer of a surface, specify the surface
             and the layer by `--surface_id' and `--layer' options.
 
@@ -41,7 +45,15 @@ module OrochiForMedusa::Commands
             $ ls
             my-picture.jpg my-picture.geo
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579
+            # upload with preffered filename (for single file upload)
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-as=my-preffered-filename.jpg
+            # upload with preffered prefix (for mulitple files upload)            
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-prefix=preffered-prefix@
+            # upload with preffered suffix (for multiple files upload) my-picture@preffered-suffix.jpg
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-suffix=@preffered-suffix
+            # link to the layer `my-layer'
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer
+            # unlink from the present layer 
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=top
 
           SEE ALSO
@@ -52,9 +64,10 @@ module OrochiForMedusa::Commands
             https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/upload.rb
 
           HISTORY
-            February 8, 2019: Upload also imageometry file if it exists
-            January 20, 2020: Add options to specify surface and layer to upload image
-
+          March 12, 2020: Add options to specify preffered filename, prefix, and suffix
+          January 20, 2020: Add options to specify surface and layer to upload image
+          February 8, 2019: Upload also imageometry file if it exists
+            
           IMPLEMENTATION
             Orochi, version 9
             Copyright (C) 2015-2020, Okayama University
@@ -65,6 +78,9 @@ module OrochiForMedusa::Commands
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("--surface_id=VALUE", "Link to a surface") {|v| OPTS[:surface_id] = v}
         opt.on("--layer=LAYER_NAME", "Link to a layer (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
+        opt.on("--store-as=STORE_AS_NAME", "Store as a file with specified name") {|v| OPTS[:filename] = v}
+        opt.on("--store-with-prefix=STORE_WITH_PREFIX", "Store as a file with specified prefix") {|v| OPTS[:prefix] = v}
+        opt.on("--store-with-suffix=STORE_WITH_SUFFIX", "Store as a file with specified suffix") {|v| OPTS[:suffix] = v}
         #opt.parse!(ARGV)
       end
       opts
@@ -79,10 +95,27 @@ module OrochiForMedusa::Commands
         end
       elsif OPTS[:surface_id]
         upload_to_surface(argv, OPTS[:surface_id])
-      else argv.each do |file|
-             upload(file)
-           end
+      else 
+        argv.each do |file|
+          upload(file)
+        end
       end
+    end
+
+    def build_opts_for_image(path)
+      basename = File.basename(path)
+      opts = {:filename => basename}
+      opts = opts.merge({:filename => OPTS[:filename]}) if OPTS[:filename]
+      if OPTS[:prefix] || OPTS[:suffix]
+        basename = File.basename(opts[:filename], ".*")
+        extname = File.extname(opts[:filename])
+        filename = basename
+        filename = OPTS[:prefix] + filename if OPTS[:prefix]
+        filename = filename + OPTS[:suffix] if OPTS[:suffix]
+        filename = filename + extname
+        opts[:filename] = filename
+      end
+      opts
     end
 
     def upload(arg)
@@ -92,8 +125,9 @@ module OrochiForMedusa::Commands
         puts cmd
         system_execute(cmd)
       elsif [".jpg", ".png", ".JPG", ".PNG", ".jpeg", ".JPEG"].include?(ext.downcase)
-        attach = AttachmentFile.upload(arg)
-        p attach
+        opts = build_opts_for_image(arg)
+        attach = AttachmentFile.upload(arg, opts)
+        #p attach
       else
         puts "unsupported file extension"
       end
@@ -107,30 +141,38 @@ module OrochiForMedusa::Commands
       # n = i.map{|t| t.name.sub('_','x')}
       # f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}
       n = i.map{|t| t.name }
-      f.each do |t|
-        tt = File.basename(t).gsub('x','_').gsub(' ','_')
-        if n.include?(tt)
-          AttachmentFile.find(i[n.index(tt)].id).update_file(t)
-        else
-          af = s.upload_image(:file => t)
-        end
-      end
       if OPTS[:layer]
         layer_name = OPTS[:layer]
-        s = Record.find(surface_id)
         if layer_name.downcase == 'top'
           layer_id = nil
         else
-          layer_names = s.layers.map{|id,name| name }
+          #layer = s.create_or_find_layer_by_name(layer_name)
+          layer_names = s.attributes["layers"].map{|id,name| name }
           idx = layer_names.index(layer_name)
           raise "layer `#{layer_name}' does not exist in surface `#{s.name}'." if idx.nil?
-          layer_id = s.layers[idx][0]
+          layer_id = s.attributes["layers"][idx][0]
         end
+      end
+      f.each do |t|
+        opts = build_opts_for_image(t)
+        #tt = File.basename(t).gsub('x','_').gsub(' ','_')
+        tt = opts[:filename].gsub('x','_').gsub(' ','_')
+        if n.include?(tt)
+          af = AttachmentFile.find(i[n.index(tt)].id)
+          af.filename = opts[:filename]
+          af.update_file(t)
+        else
+          af = s.upload_image(opts.merge({:file => t}))
+        end
+      end
+      if OPTS[:layer]
         s_images = s.images
         i = s_images.map{|t| t.image }
         n = i.map{|t| t.name }
         f.each do |t|
-          tt = File.basename(t).gsub('x','_').gsub(' ','_')
+          opts = build_opts_for_image(t)
+          #tt = File.basename(t).gsub('x','_').gsub(' ','_')
+          tt = opts[:filename].gsub('x','_').gsub(' ','_')
           if n.include?(tt)
             s_image = s_images[n.index(tt)]
             s_image.surface_layer_id = layer_id
