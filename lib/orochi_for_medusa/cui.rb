@@ -96,6 +96,10 @@ module OrochiForMedusa
         execute
       rescue => e
         stderr.puts "error: #{e}"
+        if options[:verbose]
+          stderr.puts e.class
+          stderr.puts e.backtrace
+        end
         exit(false)
       end
     end
