@@ -44,7 +44,7 @@ module OrochiForMedusa::Commands
         opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
         # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
         opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
-        opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
+        opt.on("-r", "--recursive", "List subitems recursively") {|v| OPTS[:recursive] = v}
         opt.on("--analysis", "Show analysis records") {|v| OPTS[:analysis] = v}
         opt.on("--file", "Show attachment_file records") {|v| OPTS[:file] = v}
         opt.on("--bib", "Show bib records") {|v| OPTS[:bib] = v}
