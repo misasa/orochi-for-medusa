@@ -24,10 +24,11 @@ module OrochiForMedusa::Commands
           SEE ALSO
             uniq
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/uniq.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           HISTORY
@@ -42,7 +43,6 @@ module OrochiForMedusa::Commands
       end
       opts
     end
-
 
     def get_and_put(id)
       obj = Record.find_by_id_or_path(id)
@@ -69,7 +69,6 @@ module OrochiForMedusa::Commands
       end
     end
 
-
     def execute
       @args = []
       @godfathers = []
@@ -81,21 +80,19 @@ module OrochiForMedusa::Commands
           end
         end
       else argv.each do |id|
-          get_and_put(id)
-        end
+             get_and_put(id)
+           end
       end
 
       if OPTS[:godfather]
         @godfathers.each do |godfather|
           output(godfather)
-        end       
+        end
       else
         @args.each do |arg|
           output(arg)
-        end       
+        end
       end
-
-    end 
-
+    end
   end
 end

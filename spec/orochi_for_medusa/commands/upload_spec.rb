@@ -42,6 +42,15 @@ module OrochiForMedusa::Commands
         }
       end
 
+      context "with png" do
+        let(:file){ "0000-0001.png" }
+
+        it {
+          expect(AttachmentFile).to receive(:upload).with(file)
+          subject
+        }
+      end
+
       context "with pml" do
         let(:file){ "0000-0001.pml" }
 
@@ -50,13 +59,6 @@ module OrochiForMedusa::Commands
           subject
         }
       end
-
-      # it {
-      #   subject
-      #   expect(cui.instance_variable_get(:@godfathers)).to include(obj)       
-      #   expect(cui.instance_variable_get(:@args)).to include(obj)
-      # }
-
     end
 
 
@@ -72,7 +74,6 @@ module OrochiForMedusa::Commands
         let(:args){ [] }
         let(:id){ '0001'}
 
-
         it {
           expect(stdin).to receive(:gets).and_return(id, nil)
           expect(cui).to receive(:upload).with(id)
@@ -87,6 +88,26 @@ module OrochiForMedusa::Commands
           expect(cui).to receive(:upload).with(id)
           subject
         }
+      end
+
+      describe "with surface option", :current => true do
+        let(:args){ [File.join('tmp',file), "--surface_id=#{surface_id}", "--layer=#{layer}", "--verbose"] }
+        let(:file){ '00002 X001 Y008.png'}
+        let(:geo){ '00002 X001 Y008.geo'}
+        let(:surface_id){ '20191008162241-096894' }
+        let(:layer){ 'test' }
+        before do
+          setup_file(file)
+          setup_file(geo)
+        end
+        it {
+          expect(cui).to receive(:upload_to_surface).with([File.join('tmp',file)], surface_id)
+          #expect(cui).to receive(:upload).with(file)
+          subject
+        }
+        after do
+          FileUtils.remove_entry('tmp')
+        end
       end
 
     end

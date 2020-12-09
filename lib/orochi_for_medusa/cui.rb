@@ -39,7 +39,7 @@ module OrochiForMedusa
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -96,6 +96,10 @@ module OrochiForMedusa
         execute
       rescue => e
         stderr.puts "error: #{e}"
+        if options[:verbose]
+          stderr.puts e.class
+          stderr.puts e.backtrace
+        end
         exit(false)
       end
     end
