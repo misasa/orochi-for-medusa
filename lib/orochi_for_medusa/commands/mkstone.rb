@@ -16,10 +16,11 @@ module OrochiForMedusa::Commands
         SEE ALSO
             orochi-upload
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/mkstone.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2016 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -30,7 +31,6 @@ module OrochiForMedusa::Commands
         opt.on("-T image", "--upload-file image", "Run upload_file") {|v| OPTS[:upload_file] = v}
         opt.on("-x", "--box", "Make a box") {|v| OPTS[:mkbox] = v}
         opt.on("--label", "NOT print barcode") {|v| OPTS[:label] = v}
-
       end
       opts
     end
@@ -39,7 +39,6 @@ module OrochiForMedusa::Commands
       raise "specify name" if argv.length != 1
       stonename = argv[0]
       mkstone(stonename)
-
     end
 
     def mkstone(stonename)

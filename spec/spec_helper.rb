@@ -24,6 +24,13 @@ end
 #   @stderr ||= Output.new
 # end
 
+def setup_file(path)
+  FileUtils.mkdir_p('tmp')
+
+  src = File.join('spec/fixtures/files', path)
+  FileUtils.cp(src, File.join('tmp',path))
+end
+
 RSpec::Matchers.define :exit_with_code do |code|
   def supports_block_expectations?
     true

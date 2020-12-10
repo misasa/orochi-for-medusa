@@ -5,32 +5,33 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-              #{program_name} - Store a stone to a box
+            #{program_name} - Store a stone to a box
 
           SYNOPSIS
-              #{program_name} [options] stone    [stone2 ... ] box
-              #{program_name} [options] stone    [child2 ... ] stone-parent
-              #{program_name} [options] stone    [stone2 ... ] bib
-              #{program_name} [options] stone    [stone2 ... ] table
-              #{program_name} [options] stone    [stone2 ... ] place
-              #{program_name} [options] analysis [stone2 ... ] stone
+            #{program_name} [options] stone    [stone2 ... ] box
+            #{program_name} [options] stone    [child2 ... ] stone-parent
+            #{program_name} [options] stone    [stone2 ... ] bib
+            #{program_name} [options] stone    [stone2 ... ] table
+            #{program_name} [options] stone    [stone2 ... ] place
+            #{program_name} [options] analysis [stone2 ... ] stone
 
           DESCRIPTION
-             Store a stone to a box.  Or set a stone as a child.
-             Or linke a stone to bib, table, and place.  Or link an analysis
-             to stone.  To rename stone (or something else) use `orochi-rename'.
+            Store a stone to a box.  Or set a stone as a child.
+            Or linke a stone to bib, table, and place.  Or link an analysis
+            to stone.  To rename stone (or something else) use `orochi-rename'.
 
-             To cut parent-children relationships, feed `nobody' as last
-             argument instead of parent ID.  In a smilar fashion, to remove
-             stone from box, feed `/' as last argument instead of box ID.
+            To cut parent-children relationships, feed `nobody' as last
+            argument instead of parent ID.  In a smilar fashion, to remove
+            stone from box, feed `/' as last argument instead of box ID.
 
           SEE ALSO
-              orochi-rename
-              http://dream.misasa.okayama-u.ac.jp
+            orochi-rename
+            http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/mv.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2019 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -54,12 +55,12 @@ module OrochiForMedusa::Commands
       OPTS[:nobox]  = :v if parent_id == "/"
 
       parent_obj  = Record.find(parent_id) unless OPTS[:nobody] or OPTS[:nobox]
-            p parent_obj       if OPTS[:verbose]
-            if OPTS[:verbose]
+      p parent_obj       if OPTS[:verbose]
+      if OPTS[:verbose]
         # child_obj = child_obj.reload
-              print "--> parent_obj "
-              p parent_obj
-            end
+        print "--> parent_obj "
+        p parent_obj
+      end
 
       children_id.each do |id|
         child_obj = Record.find(id)
@@ -101,11 +102,11 @@ module OrochiForMedusa::Commands
           # end
           #  child_obj.save
         end
-              if OPTS[:verbose]
+        if OPTS[:verbose]
           child_obj = child_obj.reload
-                print "--> child_obj "
-                p child_obj
-              end
+          print "--> child_obj "
+          p child_obj
+        end
       end
     end
   end

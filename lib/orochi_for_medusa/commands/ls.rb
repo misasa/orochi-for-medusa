@@ -11,16 +11,17 @@ module OrochiForMedusa::Commands
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            List box contents or daughters.  Search Medusa by ID and list
+            List box contents or daughters.  Search on service by Medusa by ID and list
             `stones and boxes' or `daughters' depending on owner of ID to be
             box or stone.  If argument is empty, ID in environmental variable
-            `OROCHI_PWD' is searched.  To obtain name of certain ID, call
+            `OROCHI_PWD' is fed.  To obtain name of certain ID, call
             `orochi-name'.  To obtain godfather, call `orochi-pwd --top'
 
           EXAMPLE
             To obtain list of daughters, issue either followings.
             $ orochi-ls      20150327112504-048340
             $ orochi-ls --id 20150327112504-048340 | orochi-pwd
+            $ orochi-ls --id --recursive 20150327112504-048340 20101015100407679.hkitagawa
 
             To obtain stone tree, issue following.
             $ orochi-ls -r --id 20150327112504-048340 | orochi-pwd
@@ -30,30 +31,29 @@ module OrochiForMedusa::Commands
             orochi-pwd
             orochi-name
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/ls.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University 
+            Copyright (C) 2015-2020 Okayama University 
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
         EOS
-          opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-          opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
-          # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
-          opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
-          opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
-          opt.on("--analysis", "Show analysis records") {|v| OPTS[:analysis] = v}
-          opt.on("--file", "Show attachment_file records") {|v| OPTS[:file] = v}
-          opt.on("--bib", "Show bib records") {|v| OPTS[:bib] = v}
-          opt.on("--stone", "Show list of stones") {|v| OPTS[:stone] = v}
-          opt.on("--box", "Show list of boxes") {|v| OPTS[:box] = v}
-          # opt.on("--relatives", "Show related records") {|v| OPTS[:relatives] = v}
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("-l", "Use a long listing format"){|v| OPTS[:l] = v}
+        # opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
+        opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
+        opt.on("-r", "--recursive", "List subitems recursively") {|v| OPTS[:recursive] = v}
+        opt.on("--analysis", "Show analysis records") {|v| OPTS[:analysis] = v}
+        opt.on("--file", "Show attachment_file records") {|v| OPTS[:file] = v}
+        opt.on("--bib", "Show bib records") {|v| OPTS[:bib] = v}
+        opt.on("--stone", "Show list of stones") {|v| OPTS[:stone] = v}
+        opt.on("--box", "Show list of boxes") {|v| OPTS[:box] = v}
+        # opt.on("--relatives", "Show related records") {|v| OPTS[:relatives] = v}
       end
       opts
     end
-
-
 
     def execute
       if argv.length < 1
@@ -63,15 +63,15 @@ module OrochiForMedusa::Commands
       end
       
       if ids.join.blank?
-          while answer = stdin.gets do
-            answer.split.each do |arg|
-                ls(arg)
-            end
+        while answer = stdin.gets do
+          answer.split.each do |arg|
+            ls(arg)
           end
+        end
       else 
         ids.each do |arg|
-              ls(arg)
-          end
+          ls(arg)
+        end
       end
 
     end
@@ -149,7 +149,6 @@ module OrochiForMedusa::Commands
       end
     end
 
-
     def census(obj)
       if OPTS[:box]
         tab_out(obj) if obj.kind_of?(Box)
@@ -171,10 +170,5 @@ module OrochiForMedusa::Commands
         end
       end
     end
-
-
   end
-
-
-
 end

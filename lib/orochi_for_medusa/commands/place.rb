@@ -20,29 +20,29 @@ module OrochiForMedusa::Commands
 
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/place.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
         EOS
-        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}        
+        opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
       end
       opts
     end
 
-
     def get_and_put(id)
       obj = Record.find_by_id_or_path(id)
       klass = obj.class.to_s
-        klass.slice!(0,18)  ##  MedusaRestClient::Stone to Stone
-        if obj.kind_of?(MedusaRestClient::Place)
-          stdout.puts "#{klass}\t\t\t#{obj.name}\t#{obj.global_id}\t#{obj.latitude}\t#{obj.longitude}"
-        else
-          stdout.puts "#{klass}\t#{obj.name}\t#{obj.global_id}\t#{obj.place.name}\t#{obj.place.global_id}\t#{obj.place.latitude}\t#{obj.place.longitude}" if obj.place
-        end
+      klass.slice!(0,18)  ##  MedusaRestClient::Stone to Stone
+      if obj.kind_of?(MedusaRestClient::Place)
+        stdout.puts "#{klass}\t\t\t#{obj.name}\t#{obj.global_id}\t#{obj.latitude}\t#{obj.longitude}"
+      else
+        stdout.puts "#{klass}\t#{obj.name}\t#{obj.global_id}\t#{obj.place.name}\t#{obj.place.global_id}\t#{obj.place.latitude}\t#{obj.place.longitude}" if obj.place
+      end
     end
 
     def execute
@@ -54,10 +54,10 @@ module OrochiForMedusa::Commands
           end
         end
       else argv.each do |id|
-          get_and_put(id)
-        end
-      end     
-    end 
+             get_and_put(id)
+           end
+      end
+    end
 
   end
 end

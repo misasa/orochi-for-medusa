@@ -15,17 +15,18 @@ module OrochiForMedusa::Commands
             option is specified.
 
           EXAMPLE
-                        > #{program_name} 20151127162008-525174 "ID-0201(IC-0201?)"
+            > #{program_name} 20151127162008-525174 "ID-0201(IC-0201?)"
 
             When you want to set -1 to quantity, insert `--'.
             > #{program_name} 20140827154239-812605 --quantity -- -1
 
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/rename.rb
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015 Okayama University
+            Copyright (C) 2015-2020 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -50,8 +51,8 @@ module OrochiForMedusa::Commands
       obj = Record.find(id)
       p obj if OPTS[:verbose]
       if OPTS[:id]
-        # obj.id                = newparam
-        # obj.update_record_property({:id => newparam})
+      # obj.id                = newparam
+      # obj.update_record_property({:id => newparam})
       # elsif OPTS[:stone]
       #   obj.stone_type        = newparam
       elsif OPTS[:description]
@@ -78,7 +79,6 @@ module OrochiForMedusa::Commands
       end
       puts obj.save
       p obj.reload if OPTS[:verbose]
-
     end
 
     def execute
@@ -90,7 +90,7 @@ module OrochiForMedusa::Commands
       end
 
       rename(id, newparam)
-    end 
+    end
 
   end
 end
