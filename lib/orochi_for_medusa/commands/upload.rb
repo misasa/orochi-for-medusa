@@ -49,6 +49,7 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("-j", "--save-json", "Save record as json") {|v| OPTS[:save_json] = v}
       end
       opts
     end
@@ -70,7 +71,13 @@ module OrochiForMedusa::Commands
       ext = File.extname(arg)
       if ext.downcase == ".jpg"
         img = AttachmentFile.upload(arg)
-        p img
+        if img && OPTS[:save_json]
+          json_path = File.join(File.dirname(arg), File.basename(arg,".*") + '.json')
+          STDERR.puts("writing |#{File.expand_path(json_path)}|")
+          File.write json_path, img.to_json
+        else
+          puts img.to_json
+        end
       elsif ext.downcase == ".pml"
         cmd = "casteml upload #{arg}"
         puts cmd
