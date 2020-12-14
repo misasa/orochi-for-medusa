@@ -37,7 +37,7 @@ module OrochiForMedusa::Commands
         let(:file){ "0000-0001.jpg" }
 
         it {
-          expect(AttachmentFile).to receive(:upload).with(file)
+          expect(AttachmentFile).to receive(:upload).with(file, {filename: file})
           subject
         }
       end
@@ -46,7 +46,7 @@ module OrochiForMedusa::Commands
         let(:file){ "0000-0001.png" }
 
         it {
-          expect(AttachmentFile).to receive(:upload).with(file)
+          expect(AttachmentFile).to receive(:upload).with(file, {filename: file})
           subject
         }
       end
