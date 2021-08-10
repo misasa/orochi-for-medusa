@@ -1,4 +1,5 @@
 require 'orochi_for_medusa/cui'
+require 'open-uri'
 module OrochiForMedusa::Commands
   class Image < OrochiForMedusa::Cui
     def option_parser
