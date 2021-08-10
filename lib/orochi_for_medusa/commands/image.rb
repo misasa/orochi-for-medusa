@@ -17,10 +17,12 @@ module OrochiForMedusa::Commands
 
           EXAMPLE
             To obtain imagefile with imageometryfile, issue following.
-            $ orochi-image      20150327112504-048340
-
+            $ orochi-image 20160913191801-027762
+            mosaic.geo mosaic.jpg
             To obtain imageometryfile without imagefile, issue following.
-            $ orochi-image --geo 20150327112504-048340
+            $ orochi-image --geo 20160913191801-027762
+            $ ls
+            mosaic.geo
 
           SEE ALSO
             orochi-ls
@@ -28,7 +30,7 @@ module OrochiForMedusa::Commands
             orochi-pwd
             orochi-name
             http://dream.misasa.okayama-u.ac.jp
-            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/ls.rb
+            https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/image.rb
 
           IMPLEMENTATION
             Orochi, version 9
