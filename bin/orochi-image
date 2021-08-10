@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'orochi_for_medusa'
+
+OrochiForMedusa::Runner.new.run(ARGV, :command_name => File.basename($0, '.*'))
