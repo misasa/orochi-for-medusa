@@ -53,6 +53,7 @@ Commands are summarized as:
 | orochi-rm            | Remove each specified record                     |
 | orochi-stone-in-box  | Convert stone to box                             |
 | orochi-uniq          | Repeat only one stone in family                  |
+| orochi-image         | Download jpg files in current directory          |
 | orochi-upload        | Upload jpg files in current directory            |
 | orochi-url           | Show record in standard output by curl and w3m   |
 
