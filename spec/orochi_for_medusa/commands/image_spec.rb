@@ -56,7 +56,7 @@ module OrochiForMedusa::Commands
         it {
           expect(obj).to receive(:kind_of?).with(AttachmentFile).and_return(true)
           expect(cui).not_to receive(:download_file).with(obj)
-          expect(obj).to receive(:dump_geo).with("example.geo").and_return(true)
+          expect(obj).to receive(:dump_geofile).with("example.geo").and_return(true)
           expect(Record).to receive(:find_by_id_or_path).with(id).and_return(obj)
           subject
         }
@@ -68,7 +68,7 @@ module OrochiForMedusa::Commands
         let(:obj){ double('obj', :name => 'example.png', :original_path => "/stone/system/attachment_files/0006/7796/20210809-1835.png?1628565726") }
         it {
           expect(obj).to receive(:kind_of?).with(AttachmentFile).and_return(true)
-          expect(obj).to receive(:dump_geo).with("example.geo").and_return(true)
+          expect(obj).to receive(:dump_geofile).with("example.geo").and_return(true)
           expect(cui).to receive(:download_file).with(obj)
           expect(Record).to receive(:find_by_id_or_path).with(id).and_return(obj)
           subject

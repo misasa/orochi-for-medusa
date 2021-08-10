@@ -66,7 +66,7 @@ module OrochiForMedusa::Commands
       obj = Record.find_by_id_or_path(arg)
       if obj.kind_of?(AttachmentFile)
         basename = File.basename(obj.name,".*")
-        obj.dump_geo(basename + ".geo")
+        obj.dump_geofile(basename + ".geo")
         download_file(obj) unless OPTS[:geo]
       else
         raise "Invalid IMAGE-ID: #{arg}"
