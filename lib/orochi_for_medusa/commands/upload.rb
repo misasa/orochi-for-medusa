@@ -34,7 +34,7 @@ module OrochiForMedusa::Commands
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
-            To upload an image with preffered name, specify the filename by
+            To upload an image with preferred name, specify the filename by
             `--store-as' options. To upload images with preffered prefix, specify
             the prefix by `--store-with-prefix' options. To upload images with preffered
             suffix, specify the suffix by `--store-with-suffix' options.
