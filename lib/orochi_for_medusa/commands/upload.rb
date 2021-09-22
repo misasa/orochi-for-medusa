@@ -53,9 +53,14 @@ module OrochiForMedusa::Commands
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-suffix=@preffered-suffix
             # link to the layer `my-layer'
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer
+            # link to the layer `my-layer' and refresh tile
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer --refresh-tile
             # unlink from the present layer 
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=top
-
+            # upload with specified imageometryfile
+            $ ls /tmp
+            28Si-int.geo
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --geo /tmp/28Si-int.geo
           SEE ALSO
             casteml upload
             orochi-mkstone
@@ -76,8 +81,11 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
+        opt.on("--geo=IMAGEOMETRYFILE", "Specify imageometryfile") {|v| OPTS[:geo_path] = v}
         opt.on("--surface_id=VALUE", "Link to a surface") {|v| OPTS[:surface_id] = v}
         opt.on("--layer=LAYER_NAME", "Link to a layer (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
+        opt.on("--force-create-layer", "Force create layer (only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:force_create_layer] = v}
+        opt.on("--refresh-tile", "Refresh tiles (only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:refresh_tile] = v}
         opt.on("--store-as=STORE_AS_NAME", "Store as a file with specified name") {|v| OPTS[:filename] = v}
         opt.on("--store-with-prefix=STORE_WITH_PREFIX", "Store as a file with specified prefix") {|v| OPTS[:prefix] = v}
         opt.on("--store-with-suffix=STORE_WITH_SUFFIX", "Store as a file with specified suffix") {|v| OPTS[:suffix] = v}
@@ -106,6 +114,7 @@ module OrochiForMedusa::Commands
       basename = File.basename(path)
       opts = {:filename => basename}
       opts = opts.merge({:filename => OPTS[:filename]}) if OPTS[:filename]
+      opts = opts.merge({:geo_path => OPTS[:geo_path]}) if OPTS[:geo_path]
       if OPTS[:prefix] || OPTS[:suffix]
         basename = File.basename(opts[:filename], ".*")
         extname = File.extname(opts[:filename])
@@ -119,7 +128,10 @@ module OrochiForMedusa::Commands
     end
 
     def upload(arg)
+      dirname = File.dirname(arg)
+      basename = File.basename(arg, ".*")
       ext = File.extname(arg)
+      json_path = File.join(dirname, basename + ".json")
       if ext.downcase == ".pml"
         cmd = "casteml upload #{arg}"
         puts cmd
@@ -127,16 +139,42 @@ module OrochiForMedusa::Commands
       elsif [".jpg", ".png", ".JPG", ".PNG", ".jpeg", ".JPEG"].include?(ext.downcase)
         opts = build_opts_for_image(arg)
         attach = AttachmentFile.upload(arg, opts)
+        show_id_and_dump_file(attach.global_id, json_path)
         #p attach
       else
         puts "unsupported file extension"
       end
     end
 
+    def show_id_and_dump_file(id, path)
+      puts "#{id}"
+      puts "writing |#{path}|..." if OPTS[:verbose];
+      record = Record.find(id)
+      File.write(path, record.to_json)
+    end
+
     def upload_to_surface(f, surface_id)
       ActiveResource::Base.logger = Logger.new(STDOUT) if OPTS[:verbose];
       # "include MedusaRestClient; ActiveResource::Base.logger = Logger.new(STDOUT); f = %w($(MASTER_IMG) $(TARGET_IMG)); s = Record.find('$(SURFACE)'); i=s.images.map{|t| t.image }; n = i.map{|t| t.name.sub('_','x')};f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}"
       s = Record.find(surface_id)
+      if OPTS[:layer]
+        layer_name = OPTS[:layer]
+        if layer_name.downcase != 'top'
+          layer_names = s.attributes["layers"].map{|id, name| name }
+          unless layer_names.any?(layer_name)
+            if OPTS[:force_create_layer]
+              priority = 0
+              _priorities = s.attributes["layers_priority"].map{|prio, name| prio}
+              priority = _priorities.max + 1 if _priorities.size > 0
+              p "creating layer #{layer_name}..." if OPTS[:verbose]
+              s.create_layer({name: layer_name, surface_id: s.id, opacity: 100, priority: priority})
+              s = Record.find(surface_id)
+            else
+              raise "layer `#{layer_name}' does not exist in surface `#{s.name}'."
+            end
+          end
+        end
+      end
       i=s.images.map{|t| t.image }
       # n = i.map{|t| t.name.sub('_','x')}
       # f.each{|t| n.include?(t) ? (AttachmentFile.find(i[n.index(t)].id).update_file(t)): (s.upload_image(:file => t))}
@@ -154,16 +192,23 @@ module OrochiForMedusa::Commands
         end
       end
       f.each do |t|
+        dirname = File.dirname(t)
+        basename = File.basename(t, ".*")
+        json_path = File.join(dirname, basename + ".json")
         opts = build_opts_for_image(t)
         #tt = File.basename(t).gsub('x','_').gsub(' ','_')
         tt = opts[:filename].gsub('x','_').gsub(' ','_')
         if n.include?(tt)
           af = AttachmentFile.find(i[n.index(tt)].id)
           af.filename = opts[:filename]
-          af.update_file(t)
+          af.update_file(t, opts)
+          gid = af.global_id
         else
           af = s.upload_image(opts.merge({:file => t}))
+          af = af.reload
+          gid = af.global_id
         end
+        show_id_and_dump_file(gid, json_path) if gid
       end
       if OPTS[:layer]
         s_images = s.images
@@ -179,6 +224,10 @@ module OrochiForMedusa::Commands
             s_image.save
           end
         end
+        if OPTS[:refresh_tile] && layer_id
+          puts "refresh tiles ..." if OPTS[:verbose];
+          s.make_layer_tiles(layer_id)
+        end  
       end
     end
   end

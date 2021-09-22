@@ -60,15 +60,53 @@ module OrochiForMedusa::Commands
         }
       end
 
-      describe "with id and newparam" do
+      describe "with id and newname" do
         let(:args){ [id, newparam] }
         let(:id){ '0001'}
+        let(:obj){ double('obj').as_null_object }
         let(:newparam){ "bra"}
         it {
-          expect(cui).to receive(:rename).with(id, newparam)
+          expect(Record).to receive(:find).with(id).and_return(obj)
+          expect(obj).to receive(:name=).with(newparam)
           subject
         }
       end
+
+      describe "with id and --description description" do
+        let(:args){ [id, '--description', newparam] }
+        let(:id){ '0001'}
+        let(:newparam){ "brabra"}
+        let(:obj){ double('obj').as_null_object }
+        it {
+          expect(Record).to receive(:find).with(id).and_return(obj)
+          expect(obj).to receive(:description=).with(newparam)
+          subject
+        }
+      end      
+
+      describe "with id and --key key value" do
+        let(:args){ [id, '--key', 'hoge', newparam] }
+        let(:id){ '0001'}
+        let(:newparam){ "brabra"}
+        let(:obj){ double('obj').as_null_object }
+        it {
+          expect(Record).to receive(:find).with(id).and_return(obj)
+          expect(obj).to receive(:hoge=).with(newparam)
+          subject
+        }
+      end      
+      #affine-matrix [4.91196e-01,9.81198e-02,2.58169e+03;-8.88352e-02,4.84811e-01,-1.27269e+03;2.42902e-08,-4.85341e-09,1.00000e+00]
+      describe "with id and --key affine_matrix value" do
+        let(:args){ [id, '--key', 'affine_matrix', newparam] }
+        let(:id){ '0001'}
+        let(:newparam){ "[4.91196e-01,9.81198e-02,2.58169e+03;-8.88352e-02,4.84811e-01,-1.27269e+03;2.42902e-08,-4.85341e-09,1.00000e+00]"}
+        let(:obj){ double('obj').as_null_object }
+        it {
+          expect(Record).to receive(:find).with(id).and_return(obj)
+          expect(obj).to receive(:affine_matrix_in_string=).with(newparam)
+          subject
+        }
+      end      
 
     end
 
