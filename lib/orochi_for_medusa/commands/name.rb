@@ -32,19 +32,37 @@ module OrochiForMedusa::Commands
         opt.on("-d", "--description", "Display description") {|v| OPTS[:description] = v}
         opt.on("-q", "--quantity", "Display quantity") {|v| OPTS[:quantity] = v}
         opt.on("-p", "--physical_form_id", "Display physical_form_id") {|v| OPTS[:physical_form_id] = v}
-
+        opt.on("--key VALUE", "Specify the attribute to display"){|v| OPTS[:key] = v}
+        opt.on("--all", "Display all attributes"){|v| OPTS[:all] = v}
       end
       opts
     end
 
     def get_and_put(id)
       obj = Record.find(id)
-      attributes = [obj.name]
-      attributes.push(obj.class)            if OPTS[:class]
-      attributes.push(obj.description)      if OPTS[:description]
-      attributes.push(obj.quantity)         if OPTS[:quantity]
-      attributes.push(obj.physical_form_id) if OPTS[:physical_form_id]
-      puts attributes.join(",")
+      if OPTS[:all]
+        puts obj.attributes
+      elsif OPTS[:key]
+        v = obj.send(OPTS[:key].to_sym)
+        if OPTS[:key] == 'affine_matrix'
+          m =v 
+          if m && m.size == 9
+            array =[m[0..2],m[3..5],m[6..8]]
+            v = "[#{array.map{|a| a.join(',')}.join(';')}]"
+            #v = "[#{m.join(',')}]"
+          else
+            v = "[]"
+          end
+        end
+        puts v
+      else 
+        attributes = [obj.name]
+        attributes.push(obj.class)            if OPTS[:class]
+        attributes.push(obj.description)      if OPTS[:description]
+        attributes.push(obj.quantity)         if OPTS[:quantity]
+        attributes.push(obj.physical_form_id) if OPTS[:physical_form_id]
+        puts attributes.join(",")
+      end
     end
     def execute
       if argv.length < 1

@@ -19,6 +19,11 @@ module OrochiForMedusa::Commands
 
             When you want to set -1 to quantity, insert `--'.
             > #{program_name} 20140827154239-812605 --quantity -- -1
+            or 
+            > #{program_name} 20140827154239-812605 --key quantity -- -1
+
+            When you want to set affine matrix.
+            > #{program_name} 20210914020443-826466 --key affine_matrix "[4.91196e-01,9.81198e-02,2.58169e+03;-8.88352e-02,4.84811e-01,-1.27269e+03;2.4a2902e-08,-4.85341e-09,1.00000e+00]"
 
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp
@@ -42,7 +47,7 @@ module OrochiForMedusa::Commands
         opt.on("--quantity", "Change quantity") {|v| OPTS[:quantity] = v}
         opt.on("--quantity_unit", "Change quantity_unit") {|v| OPTS[:quantity_unit] = v}
         opt.on("--global_id", "Change global_id") {|v| OPTS[:global_id] = v}
-
+        opt.on("--key KEY", "Specify the attribute to change") {|v| OPTS[:key] = v}
       end
       opts
     end
@@ -50,7 +55,32 @@ module OrochiForMedusa::Commands
     def rename(id, newparam)
       obj = Record.find(id)
       p obj if OPTS[:verbose]
-      if OPTS[:id]
+
+      if OPTS[:key]
+        attrib = OPTS[:key]
+        if attrib == 'affine_matrix' || attrib == 'affine_matrix_in_string'
+          str = newparam
+          str = str.gsub(/\[/,"").gsub(/\]/,"").gsub(/\;/,",").gsub(/\s+/,"")
+          tokens = str.split(',')
+          vals = tokens.map{|token| token.to_f}
+          vals.concat([0,0,1]) if vals.size == 6
+          if vals.size == 9
+            m = vals
+          end
+          if m.size == 9
+            array =[m[0..2],m[3..5],m[6..8]]
+            obj.update_affine_matrix(m)
+          else
+            raise "invalid affine_matrix (try --key affine_matrix 1,0,0,0,1,0,0,0,1)"
+          end
+          attrib = 'affine_matrix_in_string'
+          obj.attributes.delete(:affine_matrix)
+          obj.affine_matrix_in_string = newparam
+        else
+          obj.send((attrib + '=').to_sym, newparam)
+        end
+        #obj.send((attrib + '=').to_sym, newparam)
+
       # obj.id                = newparam
       # obj.update_record_property({:id => newparam})
       # elsif OPTS[:stone]
@@ -77,7 +107,7 @@ module OrochiForMedusa::Commands
       else
         obj.name              = newparam
       end
-      puts obj.save
+      obj.save
       p obj.reload if OPTS[:verbose]
     end
 
