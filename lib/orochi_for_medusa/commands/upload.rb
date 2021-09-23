@@ -61,6 +61,7 @@ module OrochiForMedusa::Commands
             $ ls /tmp
             28Si-int.geo
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --geo /tmp/28Si-int.geo
+
           SEE ALSO
             casteml upload
             orochi-mkstone
