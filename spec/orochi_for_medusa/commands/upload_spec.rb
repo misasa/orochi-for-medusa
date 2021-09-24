@@ -33,20 +33,28 @@ module OrochiForMedusa::Commands
 
     describe "upload" do
       subject { cui.upload file }
-      context "with jpg" do
+      context "with jpg", :current => true do
         let(:file){ "0000-0001.jpg" }
+        let(:json_path){ "./0000-0001.json" }
+        let(:id){  '202100000000-001' }
+        let(:obj){ double("record", :global_id => id).as_null_object }
 
         it {
-          expect(AttachmentFile).to receive(:upload).with(file, {filename: file})
+          expect(AttachmentFile).to receive(:upload).with(file, {filename: file}).and_return(obj)
+          expect(cui).to receive(:show_id_and_dump_file).with(id, json_path)
           subject
         }
       end
 
       context "with png" do
         let(:file){ "0000-0001.png" }
+        let(:json_path){ "./0000-0001.json" }
+        let(:id){  '202100000000-001' }
+        let(:obj){ double("record", :global_id => id).as_null_object }
 
         it {
-          expect(AttachmentFile).to receive(:upload).with(file, {filename: file})
+          expect(AttachmentFile).to receive(:upload).with(file, {filename: file}).and_return(obj)
+          expect(cui).to receive(:show_id_and_dump_file).with(id, json_path)
           subject
         }
       end
@@ -90,7 +98,7 @@ module OrochiForMedusa::Commands
         }
       end
 
-      describe "with surface option", :current => true do
+      describe "with surface option" do
         let(:args){ [File.join('tmp',file), "--surface_id=#{surface_id}", "--layer=#{layer}", "--verbose"] }
         let(:file){ '00002 X001 Y008.png'}
         let(:geo){ '00002 X001 Y008.geo'}
