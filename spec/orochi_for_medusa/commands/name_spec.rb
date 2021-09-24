@@ -80,7 +80,7 @@ module OrochiForMedusa::Commands
         it {
           #expect(cui).to receive(:get_and_put).with(id)
           expect(Record).to receive(:find).with(id).and_return(obj)
-          expect(obj).to receive(:name)
+          #expect(obj).to receive(:name)
           expect(obj).to receive(attribute.to_sym).and_return('hogehoge')
           subject
         }
@@ -94,7 +94,7 @@ module OrochiForMedusa::Commands
         it {
           #expect(cui).to receive(:get_and_put).with(id)
           expect(Record).to receive(:find).with(id).and_return(obj)
-          expect(obj).to receive(:name)
+          #expect(obj).to receive(:name)
           expect(obj).to receive(attribute.to_sym).and_return([1,0,0,0,1,0,0,0,1])
           subject
         }
