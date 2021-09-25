@@ -20,7 +20,7 @@ SEE ALSO
 
 IMPLEMENTATION
   Orochi, version 9
-  Copyright (C) 2015-2020 Okayama University
+  Copyright (C) 2015-2021 Okayama University
   License GPLv3+: GNU GPL version 3 or later
 
 OPTIONS

@@ -12,13 +12,14 @@ module OrochiForMedusa::Commands
             #{program_name} [options] id
 
           DESCRIPTION
-            Search on service by Medusa by ID and download imagefile with 
-            imageometryfile.
+            Download imagefile.  Search on service by Medusa by ID and
+            download imagefile with imageometryfile.
 
           EXAMPLE
             To obtain imagefile with imageometryfile, issue following.
             $ orochi-image 20160913191801-027762
             mosaic.geo mosaic.jpg
+
             To obtain imageometryfile without imagefile, issue following.
             $ orochi-image --geo 20160913191801-027762
             $ ls
@@ -34,7 +35,7 @@ module OrochiForMedusa::Commands
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2020 Okayama University 
+            Copyright (C) 2015-2021 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -47,10 +48,10 @@ module OrochiForMedusa::Commands
 
     def execute
       ids = argv.clone
-      
+
       if ids.join.blank?
         raise "Specify IMAGE-ID"
-      else 
+      else
         ids.each do |arg|
           ls(arg)
         end

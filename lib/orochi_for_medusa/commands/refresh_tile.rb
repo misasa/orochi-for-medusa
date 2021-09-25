@@ -5,33 +5,36 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Reflesh tiles on service by Medusa
+            #{program_name} - Refresh tiles in layers on a surface
 
           SYNOPSIS
             #{program_name} [options] SURFACE_ID [LAYER1, LAYER2 ...]
 
           DESCRIPTION
-            Refresh tiles on service by Medusa. To refresh tiles in a layer of a surface, specify the layer name by args.
+            Refresh tiles in layers on a surface. Do not specify layers
+            when you want to refresh all layers.
 
           EXAMPLE
-            # refresh all tiles
+            ## refresh all tiles
             $ #{program_name} 20181122134024-911579
-            # refresh tiles in layer `BSE'
+
+            ## refresh tiles only in layer `BSE'
             $ #{program_name} 20181122134024-911579 BSE
-            # refresh tiles in layer `BSE' and `Raman'
+
+            ## refresh tiles in both layer `BSE' and layer `Raman'
             $ #{program_name} 20181122134024-911579 BSE Raman
 
           SEE ALSO
-            orochi-upload
+            orochi-upload --refresh-tile
             http://dream.misasa.okayama-u.ac.jp
             https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/refresh_tile.rb
 
           HISTORY
-          September 24, 2020: First commit
-            
+            September 24, 2020: First commit
+
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2020, Okayama University
+            Copyright (C) 2015-2021, Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
@@ -55,7 +58,7 @@ module OrochiForMedusa::Commands
           if idx.nil?
             puts "layer `#{layer_name}' does not exist in surface `#{s.name}'."
             next
-          end 
+          end
           layer_id = s.attributes["layers"][idx][0]
           s.make_layer_tiles(layer_id)
         end
@@ -182,7 +185,7 @@ module OrochiForMedusa::Commands
         if OPTS[:refresh_tile] && layer_id
           puts "refresh tiles ..." if OPTS[:verbose];
           s.make_layer_tiles(layer_id)
-        end  
+        end
       end
     end
   end

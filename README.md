@@ -49,11 +49,12 @@ Commands are summarized as:
 | orochi-open          | Open record by default browser                   |
 | orochi-place         | Search Medusa and return latitude and longitude  |
 | orochi-pwd           | Print name of the orochi working box             |
+| orochi-refresh-tile  | Refresh tiles in layers on a surface             |
 | orochi-rename        | Rename record or change attribute                |
 | orochi-rm            | Remove each specified record                     |
 | orochi-stone-in-box  | Convert stone to box                             |
 | orochi-uniq          | Repeat only one stone in family                  |
-| orochi-image         | Download jpg files in current directory          |
+| orochi-image         | Download image files in current directory        |
 | orochi-upload        | Upload jpg files in current directory            |
 | orochi-url           | Show record in standard output by curl and w3m   |
 
