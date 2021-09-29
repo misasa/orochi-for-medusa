@@ -22,11 +22,15 @@ module OrochiForMedusa::Commands
             option.  This is because stone-ID to be correlated with,
             should be specified in pmlfile.
 
-            When this program finds imageometry file
-            `my-picture.geo' (Affine matrix of xy-on-image to vs
-            space), it also uploads it.  Use `vs_attach_image.m' or
-            `vs-attach-image --dry-run' to create the imageometry
-            file.  An example of the imageometry file is shown below.
+            When this program finds imageometry file `my-picture.geo'
+            (Affine matrix of xy-on-image to vs space), it also
+            uploads it and update Affine matrix of the image stored on
+            a service provided by Medusa.  When this program does not
+            find the imageometry, Affine matrix of the image stored on
+            a service provided by Medusa remains intact.  Use
+            `vs_attach_image.m' or `vs-attach-image --dry-run' to
+            create the imageometry file.  An example of the
+            imageometry file is shown below.
 
             $ cat my-picture.geo
             affine_xy2vs:
@@ -34,12 +38,14 @@ module OrochiForMedusa::Commands
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
-            To upload an image with preferred name, specify the filename by
-            `--store-as' options. To upload images with preffered prefix, specify
-            the prefix by `--store-with-prefix' options. To upload images with preffered
-            suffix, specify the suffix by `--store-with-suffix' options.
-            To upload an image onto a layer of a surface, specify the surface
-            and the layer by `--surface_id' and `--layer' options.
+            To upload an image with preferred name, specify the
+            filename by `--store-as' options.  To upload images with
+            preffered prefix, specify the prefix by
+            `--store-with-prefix' options.  To upload images with
+            preffered suffix, specify the suffix by
+            `--store-with-suffix' options.  To upload an image onto a
+            layer of a surface, specify the surface and the layer by
+            `--surface_id' and `--layer' options.
 
           EXAMPLE
             $ ls
@@ -76,7 +82,7 @@ module OrochiForMedusa::Commands
             
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2020, Okayama University
+            Copyright (C) 2015-2021 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS
