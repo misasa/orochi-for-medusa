@@ -45,8 +45,8 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--geo", "Download imageometryfile only") {|v| OPTS[:geo] = v}
-        opt.on("--json", "Download json only") {|v| OPTS[:json] = v}
+        opt.on("--geo", "Download imageometryfile") {|v| OPTS[:geo] = v}
+        opt.on("--json", "Download json") {|v| OPTS[:json] = v}
       end
       opts
     end
