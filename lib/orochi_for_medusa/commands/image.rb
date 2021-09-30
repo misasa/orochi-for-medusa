@@ -16,15 +16,19 @@ module OrochiForMedusa::Commands
             download imagefile with imageometryfile.
 
           EXAMPLE
-            To obtain imagefile with imageometryfile, issue following.
+            To obtain imagefile, issue following.
             $ orochi-image 20160913191801-027762
-            mosaic.geo mosaic.jpg
+            mosaic.jpg
 
-            To obtain imageometryfile without imagefile, issue following.
+            To obtain imageometryfile, issue following.
             $ orochi-image --geo 20160913191801-027762
             $ ls
             mosaic.geo
 
+            To obtain json, issue following.
+            $ orochi-image --json 20160913191801-027762
+            $ ls
+            mosaic.json            
           SEE ALSO
             orochi-ls
             orochi-cd
@@ -42,6 +46,7 @@ module OrochiForMedusa::Commands
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("--geo", "Download imageometryfile only") {|v| OPTS[:geo] = v}
+        opt.on("--json", "Download json only") {|v| OPTS[:json] = v}
       end
       opts
     end
@@ -70,8 +75,9 @@ module OrochiForMedusa::Commands
       obj = Record.find_by_id_or_path(arg)
       if obj.kind_of?(AttachmentFile)
         basename = File.basename(obj.name,".*")
-        obj.dump_geofile(basename + ".geo")
-        download_file(obj) unless OPTS[:geo]
+        obj.dump_geofile(basename + ".geo") if OPTS[:geo]
+        File.write(basename + ".json", obj.to_json) if OPTS[:json]
+        download_file(obj) if !OPTS[:geo] && !OPTS[:json]
       else
         raise "Invalid IMAGE-ID: #{arg}"
       end
