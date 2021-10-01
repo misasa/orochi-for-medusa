@@ -13,7 +13,7 @@ module OrochiForMedusa::Commands
 
           DESCRIPTION
             Download imagefile.  Search on service by Medusa by ID and
-            download imagefile with imageometryfile.
+            download imagefile, imageometryfile, or json.
 
           EXAMPLE
             To obtain imagefile, issue following.
