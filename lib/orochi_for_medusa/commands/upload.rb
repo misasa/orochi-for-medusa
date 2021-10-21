@@ -2,6 +2,7 @@ require 'orochi_for_medusa/cui'
 module OrochiForMedusa::Commands
   class Upload < OrochiForMedusa::Cui
     def option_parser
+      OPTS[:force_create_layer] = true
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
@@ -91,7 +92,7 @@ module OrochiForMedusa::Commands
         opt.on("--geo=IMAGEOMETRYFILE", "Specify imageometryfile") {|v| OPTS[:geo_path] = v}
         opt.on("--surface_id=VALUE", "Link to a surface") {|v| OPTS[:surface_id] = v}
         opt.on("--layer=LAYER_NAME", "Link to a layer (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
-        opt.on("--force-create-layer", "Force create layer (only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:force_create_layer] = v}
+        opt.on("--[no-]force-create-layer", "Force create layer (default true and only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:force_create_layer] = v}
         opt.on("--refresh-tile", "Refresh tiles (only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:refresh_tile] = v}
         opt.on("--store-as=STORE_AS_NAME", "Store as a file with specified name") {|v| OPTS[:filename] = v}
         opt.on("--store-with-prefix=STORE_WITH_PREFIX", "Store as a file with specified prefix") {|v| OPTS[:prefix] = v}

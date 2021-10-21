@@ -99,7 +99,7 @@ module OrochiForMedusa::Commands
       end
 
       describe "with surface option" do
-        let(:args){ [File.join('tmp',file), "--surface_id=#{surface_id}", "--layer=#{layer}", "--verbose"] }
+        let(:args){ [File.join('tmp',file), "--surface_id=#{surface_id}", "--layer=#{layer}", "--verbose", "--no-force-create-layer"] }
         let(:file){ '00002 X001 Y008.png'}
         let(:geo){ '00002 X001 Y008.geo'}
         let(:surface_id){ '20191008162241-096894' }
