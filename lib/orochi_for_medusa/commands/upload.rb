@@ -204,8 +204,7 @@ module OrochiForMedusa::Commands
         basename = File.basename(t, ".*")
         json_path = File.join(dirname, basename + ".json")
         opts = build_opts_for_image(t)
-        #tt = File.basename(t).gsub('x','_').gsub(' ','_')
-        tt = opts[:filename].gsub('x','_').gsub(' ','_')
+        tt = opts[:filename].gsub(' ','_')
         if n.include?(tt)
           af = AttachmentFile.find(i[n.index(tt)].id)
           af.filename = opts[:filename]
@@ -224,8 +223,7 @@ module OrochiForMedusa::Commands
         n = i.map{|t| t.name }
         f.each do |t|
           opts = build_opts_for_image(t)
-          #tt = File.basename(t).gsub('x','_').gsub(' ','_')
-          tt = opts[:filename].gsub('x','_').gsub(' ','_')
+          tt = opts[:filename].gsub(' ','_')
           if n.include?(tt)
             s_image = s_images[n.index(tt)]
             s_image.surface_layer_id = layer_id
