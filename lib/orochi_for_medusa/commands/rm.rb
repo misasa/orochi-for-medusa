@@ -5,13 +5,15 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Remove a specified record
+            #{program_name} - Remove each specified record
 
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Remove a specified record on Medusa
+            Remove each specified record from Medusa.  Confirmation is
+            requested for each record unless --force is given.  Answer `!'
+            to delete all remaining records without asking.
 
           SEE ALSO
             orochi-find
@@ -26,7 +28,7 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("-f", "--force", "No prompt on deletion") {|v| OPTS[:force] = v}
+        opt.on("-f", "--force", "Delete without confirmation") {|v| OPTS[:force] = v}
 
       end
       opts

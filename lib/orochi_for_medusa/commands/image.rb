@@ -6,29 +6,29 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Download imagefile
+            #{program_name} - Download an image file
 
           SYNOPSIS
             #{program_name} [options] id
 
           DESCRIPTION
-            Download imagefile.  Search on service by Medusa by ID and
-            download imagefile, imageometryfile, or json.
+            Download an image file.  Look up a record in Medusa by ID and
+            download its image file, imageometry file, or JSON.
 
           EXAMPLE
-            To obtain imagefile, issue following.
+            To download the image file, run the following.
             $ orochi-image 20160913191801-027762
             mosaic.jpg
 
-            To obtain imageometryfile, issue following.
+            To download the imageometry file, run the following.
             $ orochi-image --geo 20160913191801-027762
             $ ls
             mosaic.geo
 
-            To obtain json, issue following.
+            To download the JSON, run the following.
             $ orochi-image --json 20160913191801-027762
             $ ls
-            mosaic.json            
+            mosaic.json
           SEE ALSO
             orochi-ls
             orochi-cd
@@ -45,8 +45,8 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--geo", "Download imageometryfile") {|v| OPTS[:geo] = v}
-        opt.on("--json", "Download json") {|v| OPTS[:json] = v}
+        opt.on("--geo", "Download the imageometry file") {|v| OPTS[:geo] = v}
+        opt.on("--json", "Download JSON") {|v| OPTS[:json] = v}
       end
       opts
     end

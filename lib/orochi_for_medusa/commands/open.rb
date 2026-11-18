@@ -6,13 +6,13 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
 NAME
-  #{program_name} - Open record by default browser
+  #{program_name} - Open records in the default browser
 
 SYNOPSIS
   #{program_name} [options] id0 [id1 ...]
 
 DESCRIPTION
-  Open record by default browser.
+  Open records in the default browser.
 
 SEE ALSO
   http://dream.misasa.okayama-u.ac.jp
@@ -26,7 +26,7 @@ IMPLEMENTATION
 OPTIONS
 EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--edit", "--edit", "open edit page") {|v| OPTS[:edit] = v}
+        opt.on("--edit", "--edit", "Open the edit page") {|v| OPTS[:edit] = v}
       end
       opts
     end

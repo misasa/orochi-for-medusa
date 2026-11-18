@@ -11,19 +11,19 @@ module OrochiForMedusa::Commands
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            List box contents or daughters.  Search on service by Medusa by ID and list
-            `stones and boxes' or `daughters' depending on owner of ID to be
-            box or stone.  If argument is empty, ID in environmental variable
-            `OROCHI_PWD' is fed.  To obtain name of certain ID, call
-            `orochi-name'.  To obtain godfather, call `orochi-pwd --top'
+            List box contents or daughters.  Look up a record in Medusa by ID and list
+            `stones and boxes' or `daughters', depending on whether the ID is a
+            box or a stone.  If no argument is given, the ID in the environment
+            variable `OROCHI_PWD' is used.  To obtain the name of an ID, call
+            `orochi-name'.  To obtain the godfather, call `orochi-pwd --top'.
 
           EXAMPLE
-            To obtain list of daughters, issue either followings.
+            To list daughters, run any of the following.
             $ orochi-ls      20150327112504-048340
             $ orochi-ls --id 20150327112504-048340 | orochi-pwd
             $ orochi-ls --id --recursive 20150327112504-048340 20101015100407679.hkitagawa
 
-            To obtain stone tree, issue following.
+            To obtain the stone tree, run the following.
             $ orochi-ls -r --id 20150327112504-048340 | orochi-pwd
 
           SEE ALSO
@@ -35,7 +35,7 @@ module OrochiForMedusa::Commands
 
           IMPLEMENTATION
             Orochi, version 9
-            Copyright (C) 2015-2021 Okayama University 
+            Copyright (C) 2015-2021 Okayama University
             License GPLv3+: GNU GPL version 3 or later
 
           OPTIONS

@@ -11,8 +11,8 @@ module OrochiForMedusa::Commands
             #{File.basename($0, '.*')} [options] keyword
 
           DESCRIPTION
-            Search Medusa by keyword and return Medusa-ID.  To obtain name of
-            Medusa-ID, use orochi-name.
+            Search Medusa by keyword and return Medusa-IDs.  To obtain the name
+            of a Medusa-ID, use orochi-name.
 
           EXAMPLE
             DOS> orochi-find magnetite
@@ -31,8 +31,8 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--name", "Display name") {|v| OPTS[:name] = v}
-        opt.on("--eq", "Exact match") {|v| OPTS[:eq] = v}
+        opt.on("--name", "Display names instead of IDs") {|v| OPTS[:name] = v}
+        opt.on("--eq", "Match the name exactly") {|v| OPTS[:eq] = v}
       end
       opts
     end

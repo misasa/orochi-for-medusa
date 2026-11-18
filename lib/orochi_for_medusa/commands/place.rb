@@ -11,8 +11,8 @@ module OrochiForMedusa::Commands
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Search Medusa and return latitude and longitude as tab separated
-            format.  Both stone-ID and place-ID are acceptable as argument.
+            Search Medusa and return latitude and longitude in tab-separated
+            format.  Both stone-IDs and place-IDs are accepted as arguments.
 
           EXAMPLE
             $ orochi-place 20150425105855-861064 20150425105855-773494 20150425105855-225181

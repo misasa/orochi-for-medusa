@@ -5,7 +5,7 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Store a stone to a box
+            #{program_name} - Store a stone in a box
 
           SYNOPSIS
             #{program_name} [options] stone    [stone2 ... ] box
@@ -16,13 +16,13 @@ module OrochiForMedusa::Commands
             #{program_name} [options] analysis [stone2 ... ] stone
 
           DESCRIPTION
-            Store a stone to a box.  Or set a stone as a child.
-            Or linke a stone to bib, table, and place.  Or link an analysis
-            to stone.  To rename stone (or something else) use `orochi-rename'.
+            Store a stone in a box, or set a stone as a child,
+            or link a stone to a bib, table, or place, or link an analysis
+            to a stone.  To rename a stone (or another record), use `orochi-rename'.
 
-            To cut parent-children relationships, feed `nobody' as last
-            argument instead of parent ID.  In a smilar fashion, to remove
-            stone from box, feed `/' as last argument instead of box ID.
+            To remove a parent-child relationship, pass `nobody' as the last
+            argument instead of a parent ID.  Similarly, to remove a stone
+            from a box, pass `/' as the last argument instead of a box ID.
 
           SEE ALSO
             orochi-rename

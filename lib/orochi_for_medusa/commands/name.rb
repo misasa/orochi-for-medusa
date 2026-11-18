@@ -5,14 +5,14 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Return name of record specified by Medusa-ID
+            #{program_name} - Return the name of a record specified by Medusa-ID
 
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Access a record in Medusa by ID and return name.  To
-            obtain Medusa-ID, use orochi-find.
+            Look up a record in Medusa by ID and return its name.  To
+            obtain a Medusa-ID, use orochi-find.
 
           SEE ALSO
             orochi-find

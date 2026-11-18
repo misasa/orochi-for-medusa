@@ -26,7 +26,7 @@ module OrochiForMedusa
       opts = OptionParser.new do |opt|
           opt.banner = <<-"EOS".unindent
           NAME
-              orochi - A comprehensive utility for Medusa
+              orochi - Command-line utilities for Medusa
 
           SYNOPSIS
               orochi-command [options]

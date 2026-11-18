@@ -12,8 +12,8 @@ module OrochiForMedusa::Commands
               #{program_name} [options] box-path
 
           DESCRIPTION
-              Change the orochi working box.  Set the working box to
-              environmental variable OROCHI_PWD.
+              Change the orochi working box.  The working box is stored in
+              the environment variable OROCHI_PWD.
 
           SEE ALSO
               orochi-ls
@@ -29,7 +29,7 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-          opt.on("--id", "Show IDs") {|v| OPTS[:id] = v}
+          opt.on("--id", "Print the ID instead of the path") {|v| OPTS[:id] = v}
       end
       opts
     end

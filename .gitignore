@@ -12,3 +12,6 @@
 *.a
 mkmf.log
 /vendor
+/Gemfile.lock
+# Written to the working directory by spec/orochi_for_medusa/commands/image_spec.rb
+/example.json

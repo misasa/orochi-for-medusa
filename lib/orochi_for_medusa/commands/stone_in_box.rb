@@ -6,22 +6,22 @@ module OrochiForMedusa::Commands
         program_name = "orochi-stone-in-box" # becuase command name and filename are different
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Transform stone to box
+            #{program_name} - Convert a stone to a box
 
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Transform stone to box.  This program changes the class of
-            stone to box by follwing steps.
+            Convert a stone to a box.  This program changes the class of
+            a record from stone to box in the following steps.
 
-            (1) Create a new box with same name of specified stone.
+            (1) Create a new box with the same name as the specified stone.
 
-            (2) Copy attachments of stone to the box.
+            (2) Copy the attachments of the stone to the box.
 
             (3) Store the stone into the box.
 
-            (4) Swap IDs of them.
+            (4) Swap their IDs.
 
           SEE ALSO
             orochi-mkstone

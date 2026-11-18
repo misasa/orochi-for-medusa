@@ -5,15 +5,15 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Repeat only one stone in family
+            #{program_name} - Write only one stone per family
 
           SYNOPSIS AND USAGE
             #{program_name} [options] stone0 [stone1 ...]
 
           DESCRIPTION
-            Repeat only one stone in family.  Look for godrather of stone
-            specified in argument (or standard input), writing only one stone
-            in their family, to standard output.  The argument is by stone-ID.
+            Write only one stone per family.  Look up the godfather of each
+            stone given as an argument (or on standard input) and write only
+            one stone per family to standard output.  Arguments are stone-IDs.
 
           EXAMPLE
             $ orochi-uniq 20110514185257-135-219 20120224090706-479-109 20120224090715-052-770
@@ -37,8 +37,8 @@ module OrochiForMedusa::Commands
           ARGUMENTS AND OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--godfather", "Write out godfather") {|v| OPTS[:godfather] = v}
-        opt.on("--name", "Display name") {|v| OPTS[:name] = v}
+        opt.on("--godfather", "Write the godfather instead") {|v| OPTS[:godfather] = v}
+        opt.on("--name", "Display names instead of IDs") {|v| OPTS[:name] = v}
 
       end
       opts

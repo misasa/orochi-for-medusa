@@ -6,29 +6,29 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Upload image and casteml files to service by Medusa
+            #{program_name} - Upload image and CASTEML files to Medusa
 
           SYNOPSIS
             #{program_name} [options] file0 [file1 ...]
 
           DESCRIPTION
-            Upload image and casteml files to service by Medusa.
-            Image format of PNG and JPG but BMP are supported.  Note
-            that casteml files are treated in special way.  For files
-            of `*.pml', an external program `casteml upload' is
-            called.  For stone registration, call `orochi-mkstone'
+            Upload image and CASTEML files to Medusa.
+            PNG and JPG images are supported, but BMP is not.  Note
+            that CASTEML files are handled specially.  For files
+            of `*.pml', the external program `casteml upload' is
+            called.  To register a stone, use `orochi-mkstone'
             instead of this program.
 
-            Note that `casteml upload' does not take stone-ID as an
-            option.  This is because stone-ID to be correlated with,
-            should be specified in pmlfile.
+            Note that `casteml upload' does not take a stone-ID as an
+            option.  This is because the stone-ID to be linked
+            should be specified in the PML file.
 
-            When this program finds imageometry file `my-picture.geo'
-            (Affine matrix of xy-on-image to vs space), it also
-            uploads it and update Affine matrix of the image stored on
-            a service provided by Medusa.  When this program does not
-            find the imageometry, Affine matrix of the image stored on
-            a service provided by Medusa remains intact.  Use
+            When this program finds an imageometry file `my-picture.geo'
+            (the affine matrix from xy-on-image to VS space), it also
+            uploads it and updates the affine matrix of the image stored
+            in Medusa.  When this program does not find the imageometry
+            file, the affine matrix of the image stored in Medusa
+            remains unchanged.  Use
             `vs_attach_image.m' or `vs-attach-image --dry-run' to
             create the imageometry file.  An example of the
             imageometry file is shown below.
@@ -39,32 +39,32 @@ module OrochiForMedusa::Commands
             - [0.0, 1.2, -1.3]
             - [  0,   0,  1.0]
 
-            To upload an image with preferred name, specify the
-            filename by `--store-as' options.  To upload images with
-            preffered prefix, specify the prefix by
-            `--store-with-prefix' options.  To upload images with
-            preffered suffix, specify the suffix by
-            `--store-with-suffix' options.  To upload an image onto a
-            layer of a surface, specify the surface and the layer by
+            To upload an image with a preferred name, specify the
+            filename with the `--store-as' option.  To upload images with
+            a preferred prefix, specify the prefix with the
+            `--store-with-prefix' option.  To upload images with
+            a preferred suffix, specify the suffix with the
+            `--store-with-suffix' option.  To upload an image onto a
+            layer of a surface, specify the surface and the layer with the
             `--surface_id' and `--layer' options.
 
           EXAMPLE
             $ ls
             my-picture.jpg my-picture.geo
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579
-            # upload with preffered filename (for single file upload)
-            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-as=my-preffered-filename.jpg
-            # upload with preffered prefix (for mulitple files upload)            
-            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-prefix=preffered-prefix@
-            # upload with preffered suffix (for multiple files upload) my-picture@preffered-suffix.jpg
-            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-suffix=@preffered-suffix
+            # upload with a preferred filename (single file)
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-as=my-preferred-filename.jpg
+            # upload with a preferred prefix (multiple files): stored as preferred-prefix@my-picture.jpg
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-prefix=preferred-prefix@
+            # upload with a preferred suffix (multiple files): stored as my-picture@preferred-suffix.jpg
+            $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --store-with-suffix=@preferred-suffix
             # link to the layer `my-layer'
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer
             # link to the layer `my-layer' and refresh tile
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=my-layer --refresh-tile
-            # unlink from the present layer 
+            # unlink from the current layer
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --layer=top
-            # upload with specified imageometryfile
+            # upload with a specified imageometry file
             $ ls /tmp
             28Si-int.geo
             $ #{program_name} my-picture.jpg --surface_id=20181122134024-911579 --geo=/tmp/28Si-int.geo
@@ -77,7 +77,7 @@ module OrochiForMedusa::Commands
             https://github.com/misasa/orochi-for-medusa/blob/master/lib/orochi_for_medusa/commands/upload.rb
 
           HISTORY
-          March 12, 2020: Add options to specify preffered filename, prefix, and suffix
+          March 12, 2020: Add options to specify preferred filename, prefix, and suffix
           January 20, 2020: Add options to specify surface and layer to upload image
           February 8, 2019: Upload also imageometry file if it exists
             
@@ -89,11 +89,11 @@ module OrochiForMedusa::Commands
           OPTIONS
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("--geo=IMAGEOMETRYFILE", "Specify imageometryfile") {|v| OPTS[:geo_path] = v}
+        opt.on("--geo=IMAGEOMETRYFILE", "Specify the imageometry file") {|v| OPTS[:geo_path] = v}
         opt.on("--surface_id=VALUE", "Link to a surface") {|v| OPTS[:surface_id] = v}
-        opt.on("--layer=LAYER_NAME", "Link to a layer (only valid with `--surface_id' option)") {|v| OPTS[:layer] = v}
-        opt.on("--[no-]force-create-layer", "Force create layer (default true and only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:force_create_layer] = v}
-        opt.on("--refresh-tile", "Refresh tiles (only valid with `--surface_id' and `--layer' option)") {|v| OPTS[:refresh_tile] = v}
+        opt.on("--layer=LAYER_NAME", "Link to a layer (valid only with `--surface_id')") {|v| OPTS[:layer] = v}
+        opt.on("--[no-]force-create-layer", "Create the layer if it does not exist (default: true; valid only with `--surface_id' and `--layer')") {|v| OPTS[:force_create_layer] = v}
+        opt.on("--refresh-tile", "Refresh tiles (valid only with `--surface_id' and `--layer')") {|v| OPTS[:refresh_tile] = v}
         opt.on("--store-as=STORE_AS_NAME", "Store as a file with specified name") {|v| OPTS[:filename] = v}
         opt.on("--store-with-prefix=STORE_WITH_PREFIX", "Store as a file with specified prefix") {|v| OPTS[:prefix] = v}
         opt.on("--store-with-suffix=STORE_WITH_SUFFIX", "Store as a file with specified suffix") {|v| OPTS[:suffix] = v}

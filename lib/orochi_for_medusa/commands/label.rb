@@ -6,35 +6,35 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Create barcode label with Medusa-ID and stone-name
+            #{program_name} - Create a barcode label with Medusa-ID and stone name
 
           SYNOPSIS
             #{program_name} [options] Medusa-ID
 
           DESCRIPTION
-            Create barcode label with Medusa-ID and stone name.  On
-            failure to obtain stone-name from Medusa, create label
-            only with Medusa-ID.
+            Create a barcode label with Medusa-ID and stone name.  If
+            the stone name cannot be obtained from Medusa, create a label
+            with Medusa-ID only.
 
-            As of November 11, 2014, label is created by King Jim's
-            Tepra through software `SPC 10'.  Setup this computer and
+            As of November 11, 2014, labels are printed on King Jim's
+            Tepra through the software `SPC 10'.  Set up this computer and
             make sure you can print something from `SPC 10'.
 
-            Then setup OROCHI-TEPRA environment.  Install Ruby gem
+            Then set up the OROCHI-TEPRA environment.  Install the Ruby gem
             `tepra' by Okayama University as shown below.
             $ gem source -a http://devel.misasa.okayama-u.ac.jp/gems/
             $ gem install tepra
 
-            A program named `tepra' will be installed on somewhere
-            appropriate.  Check where it is by `which tepra'.  Issue
-            following to have test label.
+            A program named `tepra' will be installed somewhere
+            appropriate.  Check where it is with `which tepra'.  Run the
+            following to print a test label.
             $ tepra print "20110119154409-142-363,Heaven"
 
-            Failure is because the gem cannot find printer.  This
-            often happens when printer is connected on Wi-Fi instead
-            of USB.  Identify name of the printer on `SPC 10' such as
-            `KING JIM SR5900P-NW'.  Put it to a configuration file
-            `~/.teprarc'.  A line should look like below.
+            If this fails, the gem probably cannot find the printer.  This
+            often happens when the printer is connected over Wi-Fi instead
+            of USB.  Find the name of the printer in `SPC 10', such as
+            `KING JIM SR5900P-NW'.  Put it in the configuration file
+            `~/.teprarc'.  The line should look like the one below.
             :printer: KING JIM SR5900P-NW
 
           SEE ALSO
@@ -52,7 +52,7 @@ module OrochiForMedusa::Commands
           OPTIONS
           EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
-        opt.on("-c", "--open", "Not open web browser") {|v| OPTS[:open] = v}
+        opt.on("-c", "--open", "Do not open a web browser") {|v| OPTS[:open] = v}
 
       end
       opts
