@@ -6,16 +6,17 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Download full datasets for poly families
+            #{program_name} - Download full datasets for multiple families
 
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Download full datasets for poly families.  The downloaded datasets
-            are organized by each family in a name of their godfather.  Feed
-            stone, box, or bib that return a stone in a family by orochi-ls.
-            This program calls external programs sequentially as shown below.
+            Download full datasets for multiple families.  The downloaded
+            datasets are organized by family and named after the godfather of
+            each family.  Pass a stone, box, or bib for which orochi-ls
+            returns stones in a family.
+            This program runs the following external programs in sequence.
 
             - orochi-ls --id
             - orochi-uniq
@@ -42,8 +43,8 @@ module OrochiForMedusa::Commands
         EOS
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("-r", "--recursive", "Run recursively") {|v| OPTS[:recursive] = v}
-        opt.on("-p", "--pml", "export as pmlfile") {|v| OPTS[:pml] = v}
-        opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
+        opt.on("-p", "--pml", "Keep the intermediate PML files of each family") {|v| OPTS[:pml] = v}
+        opt.on('-o outfile','-f outfile', 'Base name of the output PML and CSV files (default: Sheet1)') {|v| OPTS[:o] = v}
       end
       opts
     end

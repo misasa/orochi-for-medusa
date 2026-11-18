@@ -11,8 +11,8 @@ module OrochiForMedusa::Commands
             #{program_name} [options] SURFACE_ID [LAYER1, LAYER2 ...]
 
           DESCRIPTION
-            Refresh tiles in layers on a surface. Do not specify layers
-            when you want to refresh all layers.
+            Refresh tiles in layers on a surface.  To refresh all layers,
+            do not specify any layers.
 
           EXAMPLE
             ## refresh all tiles
@@ -21,7 +21,7 @@ module OrochiForMedusa::Commands
             ## refresh tiles only in layer `BSE'
             $ #{program_name} 20181122134024-911579 BSE
 
-            ## refresh tiles in both layer `BSE' and layer `Raman'
+            ## refresh tiles in layers `BSE' and `Raman'
             $ #{program_name} 20181122134024-911579 BSE Raman
 
           SEE ALSO

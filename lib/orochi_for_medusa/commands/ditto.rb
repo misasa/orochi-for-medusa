@@ -5,14 +5,14 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Clone box recursively
+            #{program_name} - Clone a box recursively
 
           SYNOPSIS
             #{program_name} [options] box
 
           DESCRIPTION
-            Clone box recursively.  Stones in box also are duplicated.
-            Genetic relationship to ancestor is maintained on this process.
+            Clone a box recursively.  Stones in the box are also duplicated.
+            Genetic relationships to ancestors are preserved in the process.
 
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp

@@ -5,13 +5,13 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
         NAME
-            #{program_name} - Create a stone (or box) and print barcode
+            #{program_name} - Create a stone (or box) and print a barcode
 
         SYNOPSIS
             #{program_name} stonename [options]
 
         DESCRIPTION
-            Create a stone (or box), if it does not already exist.  Then print barcode of the record.
+            Create a stone (or box) if it does not already exist.  Then print a barcode for the record.
 
         SEE ALSO
             orochi-upload
@@ -28,9 +28,9 @@ module OrochiForMedusa::Commands
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
 
         opt.on('-o outfile','-f outfile') {|v| OPTS[:o] = v}
-        opt.on("-T image", "--upload-file image", "Run upload_file") {|v| OPTS[:upload_file] = v}
+        opt.on("-T image", "--upload-file image", "Upload an image file to the record") {|v| OPTS[:upload_file] = v}
         opt.on("-x", "--box", "Make a box") {|v| OPTS[:mkbox] = v}
-        opt.on("--label", "NOT print barcode") {|v| OPTS[:label] = v}
+        opt.on("--label", "Do not print a barcode") {|v| OPTS[:label] = v}
       end
       opts
     end

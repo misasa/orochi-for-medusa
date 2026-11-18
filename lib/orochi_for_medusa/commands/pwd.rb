@@ -5,16 +5,16 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Print full hierarchy of orochi working box.
+            #{program_name} - Print the full hierarchy of the orochi working box
 
           SYNOPSIS
             #{program_name} [options] id0 [id1 ...]
 
           DESCRIPTION
-            Print full tenant hierarchy of orochi working box.  With option,
-            print full genetic hierarchy of the orochi working stone.  If
-            argument is empty, box or stone in environmental variable
-            OROCHI_PWD is surveyed.
+            Print the full tenant hierarchy of the orochi working box.  With
+            --stone, print the full genetic hierarchy of the orochi working
+            stone.  If no argument is given, the box or stone in the environment
+            variable OROCHI_PWD is used.
 
           SEE ALSO
             orochi-cd
@@ -32,7 +32,7 @@ module OrochiForMedusa::Commands
         opt.on("-v", "--[no-]verbose", "Run verbosely") {|v| OPTS[:verbose] = v}
         opt.on("--stone", "Print genetic hierarchy") {|v| OPTS[:stone] = v}
         opt.on("--id", "Display ID") {|v| OPTS[:id] = v}
-        opt.on("--top", "Show godfather") {|v| OPTS[:top] = v}
+        opt.on("--top", "Show the godfather") {|v| OPTS[:top] = v}
         opt.on("--id", "Show ID") {|v| OPTS[:id] = v}
       end
       opts

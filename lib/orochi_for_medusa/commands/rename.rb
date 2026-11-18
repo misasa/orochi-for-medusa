@@ -5,25 +5,25 @@ module OrochiForMedusa::Commands
       opts = OptionParser.new do |opt|
         opt.banner = <<-"EOS".unindent
           NAME
-            #{program_name} - Rename record or change attribute
+            #{program_name} - Rename a record or change an attribute
 
           SYNOPSIS
             #{program_name} [options] id0 value
 
           DESCRIPTION
-            Rename record or change attribute.  Rename a record unless
-            option is specified.
+            Rename a record or change an attribute.  Without an option,
+            the record is renamed.
 
           EXAMPLE
             > #{program_name} 20151127162008-525174 "ID-0201(IC-0201?)"
 
-            When you want to set -1 to quantity, insert `--'.
+            To set quantity to -1, insert `--' before the value.
             > #{program_name} 20140827154239-812605 --quantity -- -1
-            or 
+            or
             > #{program_name} 20140827154239-812605 --key quantity -- -1
 
-            When you want to set affine matrix.
-            > #{program_name} 20210914020443-826466 --key affine_matrix "[4.91196e-01,9.81198e-02,2.58169e+03;-8.88352e-02,4.84811e-01,-1.27269e+03;2.4a2902e-08,-4.85341e-09,1.00000e+00]"
+            To set an affine matrix:
+            > #{program_name} 20210914020443-826466 --key affine_matrix "[4.91196e-01,9.81198e-02,2.58169e+03;-8.88352e-02,4.84811e-01,-1.27269e+03;2.42902e-08,-4.85341e-09,1.00000e+00]"
 
           SEE ALSO
             http://dream.misasa.okayama-u.ac.jp
